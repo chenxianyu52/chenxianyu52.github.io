@@ -13,6 +13,16 @@
       "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/metastrip/",
       "lastUpdated": "2026-04-30",
       "status": "active"
+    },
+    {
+      "appName": "PDF Tiny",
+      "shortName": "pdf-tiny",
+      "applicationId": "com.xianyu.pdftiny",
+      "prd": "prs/0002_offline_pdf_tiny/",
+      "policyPath": "privacy/pdf-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/pdf-tiny/",
+      "lastUpdated": "2026-04-30",
+      "status": "draft"
     }
   ]
 }
