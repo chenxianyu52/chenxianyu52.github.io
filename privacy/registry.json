@@ -1,0 +1,18 @@
+{
+  "updatedAt": "2026-04-30",
+  "owner": "chenxianyu52",
+  "repository": "chenxianyu52.github.io",
+  "baseUrl": "https://chenxianyu52.github.io/privacy/",
+  "apps": [
+    {
+      "appName": "MetaStrip",
+      "shortName": "metastrip",
+      "applicationId": "com.xianyu.metastrip",
+      "prd": "prs/0001_metastrip_exif_editor/",
+      "policyPath": "privacy/metastrip/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/metastrip/",
+      "lastUpdated": "2026-04-30",
+      "status": "active"
+    }
+  ]
+}
