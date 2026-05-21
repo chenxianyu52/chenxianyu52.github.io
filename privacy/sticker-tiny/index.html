@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Sticker Tiny</title>
+  <meta name="description" content="Privacy Policy for Sticker Tiny, an offline AI sticker maker with WhatsApp sticker pack support for Android.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #5f6b7a;
+      --accent: #7C3AED;
+      --border: #e5e7eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1020;
+        --card: #121a2b;
+        --text: #edf2ff;
+        --muted: #aab5c5;
+        --accent: #C4B5FD;
+        --border: #243047;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      background: var(--bg);
+      color: var(--text);
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    article {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    h2 {
+      margin-top: 32px;
+      padding-top: 8px;
+      font-size: 1.35rem;
+    }
+    p, li { color: var(--text); }
+    .updated { color: var(--muted); margin-top: 0; }
+    .notice {
+      border-left: 4px solid var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+    a { color: var(--accent); }
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <h1>Privacy Policy — Sticker Tiny</h1>
+      <p class="updated"><strong>Last updated:</strong> May 21, 2026</p>
+
+      <section>
+        <h2>Overview</h2>
+        <p>Sticker Tiny ("the App") is an Android application that uses on-device AI (BiRefNet) to turn photos into transparent stickers and build sticker packs for WhatsApp. All image processing happens entirely on your device — no photos are ever uploaded to any server.</p>
+      </section>
+
+      <section>
+        <h2>Data Collection</h2>
+        <div class="notice"><strong>Sticker Tiny does not collect, store, transmit, or share your photos.</strong></div>
+        <ul>
+          <li>AI sticker cutout is performed 100% offline using an on-device model (BiRefNet, ONNX Runtime).</li>
+          <li>No user accounts are required.</li>
+          <li>No photos are uploaded to any server.</li>
+          <li>No personal data is collected by the App itself.</li>
+          <li>No in-app purchase or subscription data is processed.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Permissions</h2>
+        <p>The App requests only the minimum permissions necessary:</p>
+        <ul>
+          <li><strong>READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE:</strong> Required to access photos only after you explicitly select one via the system photo picker.</li>
+          <li><strong>INTERNET:</strong> Required solely for loading ads via Google AdMob. The core sticker cutout and WhatsApp pack features work completely offline.</li>
+          <li><strong>ACCESS_NETWORK_STATE:</strong> Used to check connectivity before attempting to load ads.</li>
+        </ul>
+        <p>The App does <strong>not</strong> request camera, location, contacts, microphone, or any other sensitive permissions for its core functionality.</p>
+      </section>
+
+      <section>
+        <h2>Third-Party Services</h2>
+        <p>The App uses the following third-party service:</p>
+        <ul>
+          <li><strong>Google AdMob:</strong> Used to display a banner ad on the result screen and a rewarded interstitial ad to unlock the optional HD save feature. Google may collect device identifiers and ad interaction data according to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+        </ul>
+        <p>No other third-party analytics, crash reporting, or tracking services are used.</p>
+      </section>
+
+      <section>
+        <h2>Data Storage</h2>
+        <ul>
+          <li>Saved stickers are written to your device's <em>Pictures/StickerTiny</em> folder as transparent PNG files.</li>
+          <li>WhatsApp sticker pack assets (WebP stickers + tray icon + <code>pack.json</code> metadata) live in the App's private storage and are exposed only to WhatsApp through the official sticker ContentProvider protocol.</li>
+          <li>Original photos are never modified.</li>
+          <li>The AI model is bundled with the App and does not download additional data.</li>
+          <li>Uninstalling the App removes all App-specific data and sticker packs. Saved sticker PNGs remain in your gallery until you delete them.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>WhatsApp Sticker Pack Integration</h2>
+        <p>The App implements the WhatsApp Sticker Pack ContentProvider protocol. When you tap "Add to WhatsApp", the App launches WhatsApp via an Intent and grants WhatsApp temporary, read-only access to your locally-built sticker pack. The App does not transmit pack data over the network or share it with any other party. The ContentProvider is protected by WhatsApp's standard <code>com.whatsapp.sticker.READ</code> permission.</p>
+      </section>
+
+      <section>
+        <h2>AgentBridge API</h2>
+        <p>The App exposes a local ContentProvider API (<code>image.cutout</code>, <code>status.ping</code>) that allows other apps on the same device to request a sticker cutout. The provider is protected by a signature-level Android permission, so only apps signed with the same key as Sticker Tiny can invoke it. All communication is entirely on-device — no network traffic is generated.</p>
+      </section>
+
+      <section>
+        <h2>Children's Privacy</h2>
+        <p>The App does not knowingly collect information from children under 13. The App contains no content directed at children.</p>
+      </section>
+
+      <section>
+        <h2>GDPR / Consent</h2>
+        <p>Where required by law, Google consent flows (UMP) may be shown for ad personalization choices. Sticker Tiny itself does not collect any personal data or photos.</p>
+      </section>
+
+      <section>
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date.</p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:chenxianyu52@gmail.com">chenxianyu52@gmail.com</a>.</p>
+      </section>
+    </article>
+    <footer>© 2026 Sticker Tiny. Privacy policy archive maintained by chenxianyu52.</footer>
+  </main>
+</body>
+</html>

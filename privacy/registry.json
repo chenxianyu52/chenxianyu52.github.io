@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-30",
+  "updatedAt": "2026-05-21",
   "owner": "chenxianyu52",
   "repository": "chenxianyu52.github.io",
   "baseUrl": "https://chenxianyu52.github.io/privacy/",
@@ -23,6 +23,36 @@
       "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/pdf-tiny/",
       "lastUpdated": "2026-04-30",
       "status": "draft"
+    },
+    {
+      "appName": "Health Log",
+      "shortName": "health-tiny",
+      "applicationId": "com.xianyu.healthtiny",
+      "prd": "prs/0006_offline_health_log/",
+      "policyPath": "privacy/health-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/health-tiny/",
+      "lastUpdated": "2026-05-08",
+      "status": "draft"
+    },
+    {
+      "appName": "BG Remover",
+      "shortName": "bgremover-tiny",
+      "applicationId": "com.xianyu.bgremovertiny",
+      "prd": "prs/0007_offline_ai_bgremover/",
+      "policyPath": "privacy/bgremover-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/bgremover-tiny/",
+      "lastUpdated": "2026-05-13",
+      "status": "active"
+    },
+    {
+      "appName": "Sticker Tiny",
+      "shortName": "sticker-tiny",
+      "applicationId": "com.xianyu.stickertiny",
+      "prd": "prs/0008_offline_ai_sticker_maker/",
+      "policyPath": "privacy/sticker-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/sticker-tiny/",
+      "lastUpdated": "2026-05-21",
+      "status": "active"
     }
   ]
 }
