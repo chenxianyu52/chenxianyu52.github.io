@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-21",
+  "updatedAt": "2026-05-22",
   "owner": "chenxianyu52",
   "repository": "chenxianyu52.github.io",
   "baseUrl": "https://chenxianyu52.github.io/privacy/",
@@ -51,7 +51,18 @@
       "prd": "prs/0008_offline_ai_sticker_maker/",
       "policyPath": "privacy/sticker-tiny/",
       "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/sticker-tiny/",
-      "lastUpdated": "2026-05-21",
+      "lastUpdated": "2026-05-22",
+      "status": "deprecated",
+      "supersededBy": "photo-compose"
+    },
+    {
+      "appName": "Photo Compose",
+      "shortName": "photo-compose",
+      "applicationId": "com.xianyu.photocompose",
+      "prd": "prs/0008_offline_ai_sticker_maker/",
+      "policyPath": "privacy/photo-compose/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/photo-compose/",
+      "lastUpdated": "2026-05-22",
       "status": "active"
     }
   ]

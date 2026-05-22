@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy — Sticker Tiny</title>
-  <meta name="description" content="Privacy Policy for Sticker Tiny, an offline AI sticker maker with WhatsApp sticker pack support for Android.">
+  <title>Privacy Policy — Photo Compose</title>
+  <meta name="description" content="Privacy Policy for Photo Compose, an offline AI cutout + background composite editor for Android.">
   <style>
     :root {
       color-scheme: light dark;
@@ -75,23 +75,22 @@
 <body>
   <main>
     <article>
-      <h1>Privacy Policy — Sticker Tiny</h1>
-      <p class="updated"><strong>Last updated:</strong> May 21, 2026</p>
-
-      <div class="notice"><strong>Notice (May 22, 2026):</strong> Sticker Tiny has been renamed to <em>Photo Compose</em> and the WhatsApp sticker-pack feature has been retired in favour of a new AI cutout + background composite editor. The canonical, up-to-date policy for the same app lives at <a href="../photo-compose/">privacy/photo-compose/</a>. This page is kept for archival purposes only.</div>
+      <h1>Privacy Policy — Photo Compose</h1>
+      <p class="updated"><strong>Last updated:</strong> May 22, 2026</p>
 
       <section>
         <h2>Overview</h2>
-        <p>Sticker Tiny ("the App") is an Android application that uses on-device AI (BiRefNet) to turn photos into transparent stickers and build sticker packs for WhatsApp. All image processing happens entirely on your device — no photos are ever uploaded to any server.</p>
+        <p>Photo Compose ("the App") is an Android application that uses on-device AI (BiRefNet) to cut subjects out of photos and composite them onto built-in or user-supplied backgrounds. All image processing — cutout, background loading, transform, and export — happens entirely on your device. No photos are uploaded to any server.</p>
       </section>
 
       <section>
         <h2>Data Collection</h2>
-        <div class="notice"><strong>Sticker Tiny does not collect, store, transmit, or share your photos.</strong></div>
+        <div class="notice"><strong>Photo Compose does not collect, store, transmit, or share your photos.</strong></div>
         <ul>
-          <li>AI sticker cutout is performed 100% offline using an on-device model (BiRefNet, ONNX Runtime).</li>
+          <li>AI subject cutout is performed 100% offline using an on-device model (BiRefNet, ONNX Runtime).</li>
+          <li>Background composite rendering runs locally on Android Canvas.</li>
           <li>No user accounts are required.</li>
-          <li>No photos are uploaded to any server.</li>
+          <li>No photos, backgrounds, or composites are uploaded to any server.</li>
           <li>No personal data is collected by the App itself.</li>
           <li>No in-app purchase or subscription data is processed.</li>
         </ul>
@@ -101,8 +100,8 @@
         <h2>Permissions</h2>
         <p>The App requests only the minimum permissions necessary:</p>
         <ul>
-          <li><strong>READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE:</strong> Required to access photos only after you explicitly select one via the system photo picker.</li>
-          <li><strong>INTERNET:</strong> Required solely for loading ads via Google AdMob. The core sticker cutout and WhatsApp pack features work completely offline.</li>
+          <li><strong>READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE:</strong> Required (a) to access the subject photo you explicitly select via the system photo picker, and (b) to access an optional custom background image you explicitly select via the same picker. Both selections are made by you on a per-image basis; the App does not browse the photo library.</li>
+          <li><strong>INTERNET:</strong> Required solely for loading ads via Google AdMob. The core cutout, compose, and save features work completely offline.</li>
           <li><strong>ACCESS_NETWORK_STATE:</strong> Used to check connectivity before attempting to load ads.</li>
         </ul>
         <p>The App does <strong>not</strong> request camera, location, contacts, microphone, or any other sensitive permissions for its core functionality.</p>
@@ -112,7 +111,7 @@
         <h2>Third-Party Services</h2>
         <p>The App uses the following third-party service:</p>
         <ul>
-          <li><strong>Google AdMob:</strong> Used to display a banner ad on the result screen and a rewarded interstitial ad to unlock the optional HD save feature. Google may collect device identifiers and ad interaction data according to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+          <li><strong>Google AdMob:</strong> Used to display a banner ad on the cutout/canvas screens and a rewarded interstitial ad to unlock the optional high-resolution (HD / 4K) save features. Google may collect device identifiers and ad interaction data according to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
         </ul>
         <p>No other third-party analytics, crash reporting, or tracking services are used.</p>
       </section>
@@ -120,22 +119,18 @@
       <section>
         <h2>Data Storage</h2>
         <ul>
-          <li>Saved stickers are written to your device's <em>Pictures/StickerTiny</em> folder as transparent PNG files.</li>
-          <li>WhatsApp sticker pack assets (WebP stickers + tray icon + <code>pack.json</code> metadata) live in the App's private storage and are exposed only to WhatsApp through the official sticker ContentProvider protocol.</li>
-          <li>Original photos are never modified.</li>
+          <li>Saved cutouts (transparent PNG) and composites (PNG with chosen background) are written to your device's <em>Pictures/PhotoCompose</em> folder.</li>
+          <li>Built-in background images are bundled inside the App and are not personalized.</li>
+          <li>User-selected custom backgrounds are read only into memory for the active editing session. The App does not copy them to private storage and does not retain them after the session ends.</li>
+          <li>Original photos and original custom backgrounds are never modified.</li>
           <li>The AI model is bundled with the App and does not download additional data.</li>
-          <li>Uninstalling the App removes all App-specific data and sticker packs. Saved sticker PNGs remain in your gallery until you delete them.</li>
+          <li>Uninstalling the App removes all App-specific data. Saved cutouts and composites remain in your gallery until you delete them.</li>
         </ul>
       </section>
 
       <section>
-        <h2>WhatsApp Sticker Pack Integration</h2>
-        <p>The App implements the WhatsApp Sticker Pack ContentProvider protocol. When you tap "Add to WhatsApp", the App launches WhatsApp via an Intent and grants WhatsApp temporary, read-only access to your locally-built sticker pack. The App does not transmit pack data over the network or share it with any other party. The ContentProvider is protected by WhatsApp's standard <code>com.whatsapp.sticker.READ</code> permission.</p>
-      </section>
-
-      <section>
         <h2>AgentBridge API</h2>
-        <p>The App exposes a local ContentProvider API (<code>image.cutout</code>, <code>status.ping</code>) that allows other apps on the same device to request a sticker cutout. The provider is protected by a signature-level Android permission, so only apps signed with the same key as Sticker Tiny can invoke it. All communication is entirely on-device — no network traffic is generated.</p>
+        <p>The App exposes a local Android <code>ContentProvider</code> API with two methods: <code>status.ping</code> (liveness probe) and <code>image.cutout</code> / <code>image.compose</code> (subject cutout and optional background composite). The provider is protected by a signature-level Android permission, so only apps signed with the same key as Photo Compose can invoke it. All communication is entirely on-device — no network traffic is generated. When another app passes a content URI through this API, Photo Compose reads it only for the duration of the operation and writes the result back via <code>FileProvider</code>.</p>
       </section>
 
       <section>
@@ -145,7 +140,7 @@
 
       <section>
         <h2>GDPR / Consent</h2>
-        <p>Where required by law, Google consent flows (UMP) may be shown for ad personalization choices. Sticker Tiny itself does not collect any personal data or photos.</p>
+        <p>Where required by law, Google consent flows (UMP) may be shown for ad personalization choices. Photo Compose itself does not collect any personal data, photos, or backgrounds.</p>
       </section>
 
       <section>
@@ -158,7 +153,7 @@
         <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:chenxianyu52@gmail.com">chenxianyu52@gmail.com</a>.</p>
       </section>
     </article>
-    <footer>© 2026 Sticker Tiny. Privacy policy archive maintained by chenxianyu52.</footer>
+    <footer>© 2026 Photo Compose. Privacy policy archive maintained by chenxianyu52.</footer>
   </main>
 </body>
 </html>
