@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BG Remover - AI Background Eraser | Free Offline Photo Tool</title>
+  <meta name="description" content="Remove photo backgrounds instantly with offline AI. No internet needed. 100% private. Download free on Samsung Galaxy Store.">
+  <meta property="og:title" content="BG Remover - AI Background Eraser">
+  <meta property="og:description" content="Remove photo backgrounds instantly with offline AI. No internet needed.">
+  <meta property="og:image" content="https://chenxianyu52.github.io/apps/bgremover-tiny/icon.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="icon.png" type="image/png">
+  <style>
+    :root {
+      --bg: #f0f4ff;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #5f6b7a;
+      --accent: #6750A4;
+      --accent-light: #E8DEF8;
+      --gradient: linear-gradient(135deg, #6750A4 0%, #9C27B0 50%, #E040FB 100%);
+      --border: #e5e7eb;
+      --shadow: 0 20px 60px rgba(103, 80, 164, 0.12);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0d1a;
+        --card: #1a1d2e;
+        --text: #edf2ff;
+        --muted: #9ca3b4;
+        --accent: #D0BCFF;
+        --accent-light: #2d2145;
+        --border: #2a2d3e;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: var(--gradient);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero .icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .hero .tagline {
+      font-size: 1.15rem;
+      opacity: 0.9;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: #6750A4;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .download-btn svg { width: 24px; height: 24px; }
+
+    /* Content */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-card .emoji {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Screenshots */
+    .screenshots-section {
+      margin-bottom: 48px;
+    }
+    .screenshots-section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .screenshots {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 8px 0 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .screenshots img {
+      width: 220px;
+      flex-shrink: 0;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      scroll-snap-align: start;
+    }
+
+    /* How it works */
+    .how-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+      margin-bottom: 48px;
+    }
+    .how-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .step {
+      text-align: center;
+    }
+    .step .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    .step h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .step p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .cta-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <img src="icon.png" alt="BG Remover App Icon" class="icon">
+    <h1>BG Remover</h1>
+    <p class="tagline">AI Background Eraser — Remove photo backgrounds instantly, 100% offline & private.</p>
+    <a href="http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.bgremovertiny" class="download-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 5v6h1.17L12 13.17 9.83 11H11V5h2m2-2H9v6H5l7 7 7-7h-4V3zm4 15H5v2h14v-2z"/></svg>
+      Download on Galaxy Store
+    </a>
+  </section>
+
+  <div class="container">
+
+    <section class="features">
+      <div class="feature-card">
+        <span class="emoji">🤖</span>
+        <h3>AI-Powered Cutout</h3>
+        <p>Advanced RMBG-2.0 AI model removes backgrounds with professional precision in seconds.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">📴</span>
+        <h3>100% Offline</h3>
+        <p>No internet connection needed. The AI runs entirely on your device — works anywhere, anytime.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔒</span>
+        <h3>Privacy First</h3>
+        <p>Your photos never leave your phone. No uploads, no accounts, no tracking. Complete privacy.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🎨</span>
+        <h3>Flexible Backgrounds</h3>
+        <p>Save with transparent, white, black, or any solid color background. Perfect for any use case.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">⚡</span>
+        <h3>One-Tap Removal</h3>
+        <p>Pick a photo and the background is removed automatically. No manual editing required.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">💰</span>
+        <h3>Free to Use</h3>
+        <p>No subscriptions, no hidden fees. Save in HD by watching a short ad. That's it.</p>
+      </div>
+    </section>
+
+    <section class="screenshots-section">
+      <h2>Screenshots</h2>
+      <div class="screenshots">
+        <img src="02_home.jpg" alt="Home screen" loading="lazy">
+        <img src="03_processing.jpg" alt="AI processing" loading="lazy">
+        <img src="04_result_transparent.jpg" alt="Result with transparent background" loading="lazy">
+        <img src="05_result_green.jpg" alt="Result with green background" loading="lazy">
+      </div>
+    </section>
+
+    <section class="how-section">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h4>Pick a Photo</h4>
+          <p>Select any photo from your gallery</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h4>AI Removes Background</h4>
+          <p>On-device AI processes the image instantly</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h4>Choose Background</h4>
+          <p>Select transparent, white, black, or custom color</p>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <h4>Save & Share</h4>
+          <p>Export in HD quality and share anywhere</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to Remove Backgrounds?</h2>
+      <p>Download BG Remover for free on Samsung Galaxy Store.</p>
+      <a href="http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.bgremovertiny" class="download-btn" style="color:#6750A4;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M13 5v6h1.17L12 13.17 9.83 11H11V5h2m2-2H9v6H5l7 7 7-7h-4V3zm4 15H5v2h14v-2z"/></svg>
+        Get it on Galaxy Store
+      </a>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Xianyu Apps &nbsp;|&nbsp; <a href="/privacy/bgremover-tiny/">Privacy Policy</a></p>
+  </footer>
+
+</body>
+</html>
