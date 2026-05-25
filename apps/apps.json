@@ -12,55 +12,7 @@
     "name": "Photo Compose — AI Cutout",
     "desc": "AI cutout + beautiful backgrounds. Drag, zoom, shadow & export.",
     "icon": "apps/icons/photo-compose.png",
-    "url": "http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.photocompose",
+    "url": "",
     "pkg": "com.xianyu.photocompose"
-  },
-  {
-    "id": "metastrip",
-    "name": "MetaStrip — EXIF Privacy Editor",
-    "desc": "View & strip photo EXIF metadata. Protect your location privacy.",
-    "icon": "apps/icons/metastrip.png",
-    "url": "http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.metastrip",
-    "pkg": "com.xianyu.metastrip"
-  },
-  {
-    "id": "pdf-tiny",
-    "name": "PDF Tiny — Offline Compressor",
-    "desc": "Compress PDF files offline. No upload, no cloud, no limits.",
-    "icon": "apps/icons/pdf-tiny.png",
-    "url": "",
-    "pkg": "com.xianyu.pdftiny"
-  },
-  {
-    "id": "image-tiny",
-    "name": "Image Tiny — Photo Compressor",
-    "desc": "Compress & convert images offline. JPEG, PNG, WebP supported.",
-    "icon": "apps/icons/image-tiny.png",
-    "url": "",
-    "pkg": "com.xianyu.imagetiny"
-  },
-  {
-    "id": "ocr-tiny",
-    "name": "OCR Tiny — Offline Text Scanner",
-    "desc": "Extract text from images offline with on-device OCR engine.",
-    "icon": "apps/icons/ocr-tiny.png",
-    "url": "",
-    "pkg": "com.xianyu.ocrtiny"
-  },
-  {
-    "id": "redact-tiny",
-    "name": "Redact Tiny — Privacy Redactor",
-    "desc": "Redact sensitive info in photos & PDFs. Fully offline.",
-    "icon": "apps/icons/redact-tiny.png",
-    "url": "",
-    "pkg": "com.xianyu.redacttiny"
-  },
-  {
-    "id": "health-tiny",
-    "name": "Health Log — Symptom Diary",
-    "desc": "Zero-knowledge offline health symptom diary. Your data stays local.",
-    "icon": "apps/icons/health-tiny.png",
-    "url": "",
-    "pkg": "com.xianyu.healthtiny"
   }
 ]

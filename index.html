@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Xianyu Apps — Free Offline Tools for Android</title>
+  <title>Gali Home — Free Offline Tools for Android</title>
   <meta name="description" content="Free offline Android tools: AI background remover, photo compose, PDF compressor, image converter, OCR and more.">
   <style>
     :root { --bg:#f5f7fa; --card:#fff; --text:#1a1a2e; --muted:#6b7280; --accent:#6750A4; --border:#e5e7eb; }
@@ -13,26 +13,28 @@
     header{text-align:center;padding:48px 20px 32px}
     header h1{font-size:1.8rem;font-weight:800;margin-bottom:6px}
     header p{color:var(--muted);font-size:1rem}
-    .apps{max-width:720px;margin:0 auto;padding:0 16px 60px;display:flex;flex-direction:column;gap:16px}
-    .app{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;text-decoration:none;color:var(--text);transition:transform .15s,box-shadow .15s}
-    .app:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-    .app img{width:64px;height:64px;border-radius:14px;flex-shrink:0;background:var(--border)}
-    .app .info{flex:1;min-width:0}
-    .app .info h2{font-size:1.05rem;font-weight:700;margin-bottom:2px}
-    .app .info p{color:var(--muted);font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .app .btn{flex-shrink:0;background:var(--accent);color:#fff;font-size:.82rem;font-weight:600;padding:8px 14px;border-radius:8px;text-decoration:none;white-space:nowrap}
+    .apps{max-width:960px;margin:0 auto;padding:0 16px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .app{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 16px;text-decoration:none;color:var(--text);transition:transform .15s,box-shadow .15s}
+    .app:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .app img{width:72px;height:72px;border-radius:16px;background:var(--border)}
+    .app h2{font-size:1rem;font-weight:700}
+    .app p{color:var(--muted);font-size:.85rem;line-height:1.4}
+    .app .btn{margin-top:auto;background:var(--accent);color:#fff;font-size:.82rem;font-weight:600;padding:8px 16px;border-radius:8px}
     .app .btn.soon{background:var(--muted);opacity:.6}
     @media(prefers-color-scheme:dark){.app .btn{color:#1a1a2e}}
-    footer{text-align:center;padding:20px;color:var(--muted);font-size:.85rem}
+    footer{text-align:center;padding:24px 20px;color:var(--muted);font-size:.85rem}
+    footer a{color:var(--accent);text-decoration:none}
   </style>
 </head>
 <body>
   <header>
-    <h1>Xianyu Apps</h1>
+    <h1>Gali Home</h1>
     <p>Free offline tools for Android — privacy first, no cloud uploads.</p>
   </header>
   <div class="apps" id="app-list"></div>
-  <footer>&copy; 2026 Xianyu Apps</footer>
+  <footer>
+    <p>&copy; 2026 Gali Home &nbsp;·&nbsp; <a href="mailto:chenxianyu1012@gmail.com">chenxianyu1012@gmail.com</a></p>
+  </footer>
   <script>
     fetch('apps/apps.json').then(r=>r.json()).then(apps=>{
       const list=document.getElementById('app-list');
@@ -44,7 +46,8 @@
         if(hasUrl)el.target='_blank';
         el.innerHTML=`
           <img src="${app.icon}" alt="${app.name}" onerror="this.style.display='none'">
-          <div class="info"><h2>${app.name}</h2><p>${app.desc}</p></div>
+          <h2>${app.name}</h2>
+          <p>${app.desc}</p>
           <span class="btn ${hasUrl?'':'soon'}">${hasUrl?'Download':'Coming Soon'}</span>`;
         list.appendChild(el);
       });
