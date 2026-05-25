@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xianyu Apps — Free Offline Tools for Android</title>
+  <meta name="description" content="Free offline Android tools: AI background remover, photo compose, PDF compressor, image converter, OCR and more.">
+  <style>
+    :root { --bg:#f5f7fa; --card:#fff; --text:#1a1a2e; --muted:#6b7280; --accent:#6750A4; --border:#e5e7eb; }
+    @media(prefers-color-scheme:dark){ :root{ --bg:#0f1117; --card:#1c1f2e; --text:#edf2ff; --muted:#9ca3b4; --accent:#D0BCFF; --border:#2a2d3e; } }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    header{text-align:center;padding:48px 20px 32px}
+    header h1{font-size:1.8rem;font-weight:800;margin-bottom:6px}
+    header p{color:var(--muted);font-size:1rem}
+    .apps{max-width:720px;margin:0 auto;padding:0 16px 60px;display:flex;flex-direction:column;gap:16px}
+    .app{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;text-decoration:none;color:var(--text);transition:transform .15s,box-shadow .15s}
+    .app:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .app img{width:64px;height:64px;border-radius:14px;flex-shrink:0}
+    .app .info{flex:1;min-width:0}
+    .app .info h2{font-size:1.05rem;font-weight:700;margin-bottom:2px}
+    .app .info p{color:var(--muted);font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .app .btn{flex-shrink:0;background:var(--accent);color:#fff;font-size:.82rem;font-weight:600;padding:8px 14px;border-radius:8px;text-decoration:none;white-space:nowrap}
+    @media(prefers-color-scheme:dark){.app .btn{color:#1a1a2e}}
+    footer{text-align:center;padding:20px;color:var(--muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Xianyu Apps</h1>
+    <p>Free offline tools for Android — privacy first, no cloud uploads.</p>
+  </header>
+  <div class="apps">
+
+    <a class="app" href="http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.bgremovertiny">
+      <img src="apps/icons/bgremover.png" alt="BG Remover">
+      <div class="info">
+        <h2>BG Remover — AI Background Eraser</h2>
+        <p>One-tap AI background removal, 100% offline. No internet needed.</p>
+      </div>
+      <span class="btn">Download</span>
+    </a>
+
+    <a class="app" href="http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.photocompose">
+      <img src="apps/icons/photo-compose.png" alt="Photo Compose">
+      <div class="info">
+        <h2>Photo Compose — AI Cutout</h2>
+        <p>AI cutout + beautiful backgrounds. Drag, zoom, shadow & export.</p>
+      </div>
+      <span class="btn">Download</span>
+    </a>
+
+    <a class="app" href="http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.metastrip">
+      <img src="apps/icons/metastrip.png" alt="MetaStrip">
+      <div class="info">
+        <h2>MetaStrip — EXIF Privacy Editor</h2>
+        <p>View & strip photo EXIF metadata. Protect your location privacy.</p>
+      </div>
+      <span class="btn">Download</span>
+    </a>
+
+  </div>
+  <footer>&copy; 2026 Xianyu Apps</footer>
+</body>
+</html>
