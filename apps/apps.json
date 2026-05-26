@@ -1,5 +1,13 @@
 [
   {
+    "id": "metastrip",
+    "name": "MetaStrip — EXIF Privacy Editor",
+    "desc": "View & remove hidden photo metadata (GPS, device, date). Protect your privacy before sharing online. 100% local processing.",
+    "icon": "apps/icons/metastrip.png",
+    "url": "",
+    "pkg": "com.xianyu.metastrip"
+  },
+  {
     "id": "bgremover-tiny",
     "name": "BG Remover — AI Background Eraser",
     "desc": "One-tap AI background removal, 100% offline. No internet needed.",
