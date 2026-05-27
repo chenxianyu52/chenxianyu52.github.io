@@ -20,7 +20,7 @@
     "name": "Photo Compose — AI Cutout",
     "desc": "AI cutout + beautiful backgrounds. Drag, zoom, shadow & export.",
     "icon": "apps/icons/photo-compose.png",
-    "url": "",
+    "url": "https://galaxystore.samsung.com/detail/com.xianyu.photocompose",
     "pkg": "com.xianyu.photocompose"
   }
 ]
