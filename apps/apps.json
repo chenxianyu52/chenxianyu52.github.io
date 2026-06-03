@@ -4,7 +4,7 @@
     "name": "MetaStrip — EXIF Privacy Editor",
     "desc": "View & remove hidden photo metadata (GPS, device, date). Protect your privacy before sharing online. 100% local processing.",
     "icon": "apps/icons/metastrip.png",
-    "url": "",
+    "url": "https://galaxystore.samsung.com/detail/com.xianyu.metastrip",
     "pkg": "com.xianyu.metastrip"
   },
   {
@@ -12,7 +12,7 @@
     "name": "BG Remover — AI Background Eraser",
     "desc": "One-tap AI background removal, 100% offline. No internet needed.",
     "icon": "apps/icons/bgremover.png",
-    "url": "http://apps.samsung.com/appquery/appDetail.as?appId=com.xianyu.bgremovertiny",
+    "url": "https://galaxystore.samsung.com/detail/com.xianyu.bgremovertiny",
     "pkg": "com.xianyu.bgremovertiny"
   },
   {
