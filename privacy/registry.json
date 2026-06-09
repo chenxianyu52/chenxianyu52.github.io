@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-22",
+  "updatedAt": "2026-06-09",
   "owner": "chenxianyu52",
   "repository": "chenxianyu52.github.io",
   "baseUrl": "https://chenxianyu52.github.io/privacy/",
@@ -63,6 +63,16 @@
       "policyPath": "privacy/photo-compose/",
       "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/photo-compose/",
       "lastUpdated": "2026-05-22",
+      "status": "active"
+    },
+    {
+      "appName": "AI Upscale",
+      "shortName": "upscale-tiny",
+      "applicationId": "com.xianyu.upscaletiny",
+      "prd": "prs/0009_offline_ai_upscale/",
+      "policyPath": "privacy/upscale-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/upscale-tiny/",
+      "lastUpdated": "2026-06-09",
       "status": "active"
     }
   ]
