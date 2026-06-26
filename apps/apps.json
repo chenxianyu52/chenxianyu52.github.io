@@ -22,5 +22,21 @@
     "icon": "apps/icons/photo-compose.png",
     "url": "https://galaxystore.samsung.com/detail/com.xianyu.photocompose",
     "pkg": "com.xianyu.photocompose"
+  },
+  {
+    "id": "upscale-tiny",
+    "name": "AI Upscale - Photo Enhancer",
+    "desc": "Revive old photos with AI. Upscale blurry images 4× offline. 100% private.",
+    "icon": "apps/icons/upscale.png",
+    "url": "https://galaxystore.samsung.com/detail/com.xianyu.upscaletiny",
+    "pkg": "com.xianyu.upscaletiny"
+  },
+  {
+    "id": "anime-tiny",
+    "name": "AI Anime",
+    "desc": "Transform your photos into stunning anime artwork — completely offline, powered by on-device AI.",
+    "icon": "apps/icons/anime.png",
+    "url": "https://galaxystore.samsung.com/detail/com.xianyu.animetiny",
+    "pkg": "com.xianyu.animetiny"
   }
 ]
