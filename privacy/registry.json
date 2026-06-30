@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-09",
+  "updatedAt": "2026-07-01",
   "owner": "chenxianyu52",
   "repository": "chenxianyu52.github.io",
   "baseUrl": "https://chenxianyu52.github.io/privacy/",
@@ -74,6 +74,16 @@
       "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/upscale-tiny/",
       "lastUpdated": "2026-06-09",
       "status": "active"
+    },
+    {
+      "appName": "Sketch Lab",
+      "shortName": "sketch-tiny",
+      "applicationId": "com.xianyu.sketchtiny",
+      "prd": "prs/0012_offline_ai_sketch/",
+      "policyPath": "privacy/sketch-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/sketch-tiny/",
+      "lastUpdated": "2026-07-01",
+      "status": "draft"
     }
   ]
 }
