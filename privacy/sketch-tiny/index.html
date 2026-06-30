@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Sketch Lab</title>
+  <meta name="description" content="Privacy Policy for Sketch Lab, an offline AI photo-to-line-art and coloring book app for Android.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #5f6b7a;
+      --accent: #FF6B3D;
+      --border: #e5e7eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1020;
+        --card: #121a2b;
+        --text: #edf2ff;
+        --muted: #aab5c5;
+        --accent: #FF9166;
+        --border: #243047;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      background: var(--bg);
+      color: var(--text);
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    article {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    h2 {
+      margin-top: 32px;
+      padding-top: 8px;
+      font-size: 1.35rem;
+    }
+    p, li { color: var(--text); }
+    .updated { color: var(--muted); margin-top: 0; }
+    .notice {
+      border-left: 4px solid var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+    a { color: var(--accent); }
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <h1>Privacy Policy — Sketch Lab</h1>
+      <p class="updated"><strong>Last updated:</strong> July 1, 2026</p>
+
+      <section>
+        <h2>Overview</h2>
+        <p>Sketch Lab ("the App") is an Android application that uses on-device AI to transform photos into black-and-white line art, coloring book outlines, and pencil sketches. All image processing happens entirely on your device — no photos are ever uploaded to any server.</p>
+      </section>
+
+      <section>
+        <h2>Data Collection</h2>
+        <div class="notice"><strong>Sketch Lab does not collect, store, transmit, or share your photos.</strong></div>
+        <ul>
+          <li>Line-art and sketch conversion is performed 100% offline using on-device AI models (Informative Drawings via ONNX Runtime) and an on-device algorithmic pencil filter.</li>
+          <li>No user accounts are required.</li>
+          <li>No photos are uploaded to any server.</li>
+          <li>No personal data is collected by the App itself.</li>
+          <li>No in-app purchase or subscription data is processed.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Permissions</h2>
+        <p>The App requests only the minimum permissions necessary:</p>
+        <ul>
+          <li><strong>READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE:</strong> Required to access photos only after you explicitly select one via the system photo picker.</li>
+          <li><strong>INTERNET:</strong> Required solely for loading ads via Start.io (StartApp). The core line-art conversion feature works completely offline.</li>
+          <li><strong>ACCESS_NETWORK_STATE:</strong> Used to check connectivity before attempting to load ads.</li>
+        </ul>
+        <p>The App does <strong>not</strong> request camera, location, contacts, or any other sensitive permissions.</p>
+      </section>
+
+      <section>
+        <h2>Third-Party Services</h2>
+        <p>The App uses the following third-party service:</p>
+        <ul>
+          <li><strong>Start.io (StartApp):</strong> Used to display rewarded interstitial and banner ads. Start.io may collect device identifiers and ad interaction data according to <a href="https://www.start.io/policy/privacy-policy-prod/" target="_blank">Start.io's Privacy Policy</a>.</li>
+        </ul>
+        <p>No other third-party analytics, crash reporting, or tracking services are used.</p>
+      </section>
+
+      <section>
+        <h2>Data Storage</h2>
+        <ul>
+          <li>Converted line-art images are saved to your device's Pictures/SketchLab folder.</li>
+          <li>Original photos are never modified.</li>
+          <li>The AI models are bundled with the App and do not download additional data.</li>
+          <li>Uninstalling the App removes all App-specific data. Saved images remain in your gallery until you delete them.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Children's Privacy</h2>
+        <p>The App does not knowingly collect information from children under 13. The App contains no content directed at children.</p>
+      </section>
+
+      <section>
+        <h2>GDPR / Consent</h2>
+        <p>Where required by law, a consent prompt may be shown for ad personalization choices through Start.io. Sketch Lab itself does not collect any personal data or photos.</p>
+      </section>
+
+      <section>
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date.</p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:chenxianyu52@gmail.com">chenxianyu52@gmail.com</a>.</p>
+      </section>
+    </article>
+    <footer>&copy; 2026 Sketch Lab. Privacy policy archive maintained by chenxianyu52.</footer>
+  </main>
+</body>
+</html>
