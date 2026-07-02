@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01",
+  "updatedAt": "2026-07-02",
   "owner": "chenxianyu52",
   "repository": "chenxianyu52.github.io",
   "baseUrl": "https://chenxianyu52.github.io/privacy/",
@@ -83,6 +83,16 @@
       "policyPath": "privacy/sketch-tiny/",
       "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/sketch-tiny/",
       "lastUpdated": "2026-07-01",
+      "status": "draft"
+    },
+    {
+      "appName": "Future Baby",
+      "shortName": "babyface-tiny",
+      "applicationId": "com.xianyu.babyfacetiny",
+      "prd": "prs/0013_offline_ai_babyface/",
+      "policyPath": "privacy/babyface-tiny/",
+      "privacyPolicyUrl": "https://chenxianyu52.github.io/privacy/babyface-tiny/",
+      "lastUpdated": "2026-07-02",
       "status": "draft"
     }
   ]
