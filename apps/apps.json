@@ -38,5 +38,13 @@
     "icon": "apps/icons/anime.png",
     "url": "https://galaxystore.samsung.com/detail/com.xianyu.animetiny",
     "pkg": "com.xianyu.animetiny"
+  },
+  {
+    "id": "sketch-tiny",
+    "name": "Sketch Lab",
+    "desc": "Turn photos into sketches, coloring book line art & pencil drawings. 100% offline.",
+    "icon": "apps/icons/sketch.png",
+    "url": "https://galaxystore.samsung.com/detail/com.xianyu.sketchtiny",
+    "pkg": "com.xianyu.sketchtiny"
   }
 ]
