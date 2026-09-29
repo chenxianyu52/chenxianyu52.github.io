@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Support — Pixora</title>
-  <meta name="description" content="Support and FAQ for Pixora, an offline AI photo toolkit for iOS (upscale, background cutout & compose, metadata strip).">
+  <meta name="description" content="Support and FAQ for Pixora, an on-device AI photo toolkit for iOS (upscale, background cutout & compose, metadata strip, ID photos).">
   <style>
     :root {
       color-scheme: light dark;
@@ -80,7 +80,7 @@
   <main>
     <article>
       <h1>Pixora Support</h1>
-      <p class="updated"><strong>Last updated:</strong> September 7, 2026</p>
+      <p class="updated"><strong>Last updated:</strong> September 15, 2026</p>
 
       <section>
         <h2>Contact</h2>
@@ -90,21 +90,40 @@
 
       <section>
         <h2>About Pixora</h2>
-        <p>Pixora is an on-device AI photo toolkit for iPhone: image upscaling, background removal &amp; background composition, and photo metadata (EXIF) viewing and removal. All processing happens entirely on your device — no photos are uploaded to any server, and no account is required.</p>
+        <p>Pixora is an on-device AI photo toolkit for iPhone: image upscaling, background removal &amp; background composition, photo metadata (EXIF) viewing and removal, and ID photo editing. All image processing happens entirely on your device — the App does not upload your photos to a server, and no Pixora account is required.</p>
       </section>
 
       <section>
         <h2>Frequently Asked Questions</h2>
 
         <h3>Does Pixora work offline?</h3>
-        <p>Yes. Every feature runs 100% on-device using bundled AI models. Pixora never uploads your photos and works with no network connection.</p>
+        <p>Photo editing runs offline using bundled AI models and native image APIs. Purchases and restoring purchases may require an internet connection to Apple's services. Opening external help links also requires a connection, and photos stored only in iCloud may need to be downloaded by the system photo picker before editing.</p>
+
+        <h3>How do I create an ID photo?</h3>
+        <p>Open <strong>ID Photo</strong> from the home screen and select a portrait. Pixora removes the background on your device. Choose a solid background from the color swatches or custom color picker, select a size, and drag or pinch to position and resize the foreground. A zoom slider, directional controls and a reset button are also available.</p>
+
+        <h3>Which ID photo sizes are available?</h3>
+        <ul>
+          <li>US passport / visa: 2 × 2 inches, 600 × 600 pixels.</li>
+          <li>UK passport print, Schengen visa and Japan passport: 35 × 45 mm, 413 × 531 pixels.</li>
+          <li>Canada passport print: 50 × 70 mm, 591 × 827 pixels.</li>
+          <li>Custom dimensions: whole numbers from 100 to 3000 pixels per side.</li>
+        </ul>
+        <p>ID photos are exported as JPEGs at the selected pixel dimensions with 300 DPI metadata. These presets describe print dimensions; online applications may require different dimensions, file sizes or other specifications.</p>
+
+        <h3>Are ID photo exports free?</h3>
+        <p>Free users can save ID photos with a visible Pixora watermark. Pixora Pro removes the watermark at the same selected dimensions. Tap <strong>Remove Watermark · Pro</strong> to open the purchase screen. Existing Pro owners do not need a separate purchase for ID photos.</p>
+
+        <h3>Will my photo be accepted for a passport or visa?</h3>
+        <p>Acceptance is not guaranteed. Size presets do not check head size, expression, lighting or all requirements of the issuing authority. Some authorities prohibit digitally altered backgrounds. Watermarked exports are not suitable for official applications. Check the current rules before using an edited image.</p>
+        <p>Official guidance: <a href="https://travel.state.gov/content/travel/en/passports/how-apply/photos.html">US passport photos</a>, <a href="https://www.gov.uk/photos-for-passports">UK passport photos</a>, and <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-passports/photos.html">Canada passport photos</a>. The editor also provides these links under <strong>Photo requirements</strong>.</p>
 
         <h3>Upscaling a large photo is slow — is that normal?</h3>
         <p>Yes. High-resolution upscaling is compute-intensive and runs entirely on your device. Larger images take longer. You can keep your screen on; upscaling continues even if the screen dims or locks.</p>
 
         <h3>What does Pixora Pro include?</h3>
         <ul>
-          <li>No watermarks on any exported image.</li>
+          <li>No watermarks on any exported image, including ID photos.</li>
           <li>Full-resolution HD &amp; 4K export in Upscale and Compose.</li>
           <li>GPS map editing in the metadata tool.</li>
           <li>A one-time purchase — not a subscription, and no ads, ever.</li>
@@ -128,7 +147,7 @@
 
       <section>
         <h2>Privacy</h2>
-        <p>Read our full <a href="https://chenxianyu52.github.io/privacy/pixora/">Privacy Policy</a>. In short: Pixora does not collect, store, transmit, or share your photos or any personal data.</p>
+        <p>Read our full <a href="https://chenxianyu52.github.io/privacy/pixora/">Privacy Policy</a>. Photo processing happens on your device. The developer does not collect your photos or store them on a server. Edited photos are saved to your Photos library only when you choose to save.</p>
       </section>
     </article>
     <footer>© 2026 Pixora. Support page maintained by chenxianyu52.</footer>
