@@ -1,5 +1,26 @@
-[
-  {
+{
+  "ios": [
+    {
+    "id": "artora",
+    "name": "Artora — AI Photo Art",
+    "desc": "Create anime art, pencil sketches and interactive 3D motion MP4 videos from photos, entirely on your iPhone.",
+    "icon": "apps/icons/artora.png",
+    "url": "https://apps.apple.com/us/app/artora-anime-art-sketch/id6809363757",
+    "cta": "Download on App Store",
+    "pkg": "com.xianyu.artora"
+    },
+    {
+    "id": "pixora",
+    "name": "Pixora — AI Photo Toolkit",
+    "desc": "Enhance photos, remove backgrounds, create ID photos and remove metadata privately on your iPhone.",
+    "icon": "apps/icons/pixora.png",
+    "url": "https://apps.apple.com/us/app/pixora-id-photo-upscale/id6808070125",
+    "cta": "Download on App Store",
+    "pkg": "com.xianyu.pixora"
+    }
+  ],
+  "android": [
+    {
     "id": "metastrip",
     "name": "MetaStrip — EXIF Privacy Editor",
     "desc": "View & remove hidden photo metadata (GPS, device, date). Protect your privacy before sharing online. 100% local processing.",
@@ -46,5 +67,6 @@
     "icon": "apps/icons/sketch.png",
     "url": "https://galaxystore.samsung.com/detail/com.xianyu.sketchtiny",
     "pkg": "com.xianyu.sketchtiny"
-  }
-]
+    }
+  ]
+}
