@@ -6300,6 +6300,18 @@ fun &lt;T&gt; create(service: Class&lt;T&gt;): T =
     } as T</code></pre>`,
 });
 
+const quantItems = DATA.find(section => section.id === 'quant').items;
+quantItems.push(
+  { p: 3, q: 'Python 的 GIL 是什么？量化任务如何选择线程、进程和协程？', a: `<p>CPython 的 <b>GIL</b> 使同一时刻通常只有一个线程执行 Python 字节码，因此 CPU 密集型任务不能仅靠多线程获得并行加速。</p><ul><li><b>I/O 密集：</b>行情订阅、网络请求、数据库访问可用线程或 <code>asyncio</code>；关键是超时、背压和取消。</li><li><b>CPU 密集：</b>参数搜索、逐笔回测可用 <code>multiprocessing</code>、任务队列或下沉到 NumPy、Numba、C++；进程间数据传输也有成本。</li><li><b>原生库：</b>NumPy、pandas 的很多计算在 C/C++ 中执行，可能释放 GIL，但要避免多个库线程池过度竞争 CPU。</li></ul><p>GIL 限制的是 CPython 字节码并行，不妨碍 I/O 并发或原生计算并行。</p>` },
+  { p: 3, q: '量化研究中如何避免 pandas/NumPy 的性能和正确性陷阱？', a: `<ul><li>优先使用 NumPy 向量化、pandas 内建聚合和分组操作，避免对每一行调用 <code>apply(axis=1)</code> 或 Python 循环。</li><li>时间序列必须排序；<code>shift</code>、<code>rolling</code> 和 <code>merge_asof</code> 要明确方向与时间边界，避免把未来数据混入信号。</li><li>pandas 会按 index 标签对齐而非仅按位置；赋值前检查 index、时区和重复时间戳。</li><li>大数据分批读取，指定数值 dtype，尽量使用 Parquet；避免在循环中反复拼接 DataFrame。</li></ul><p>当日收盘生成的信号通常应先 <code>shift(1)</code>，在下一交易日再持有。</p>` },
+  { p: 2, q: 'Python 中浅拷贝、深拷贝和可变默认参数有什么风险？', a: `<p>赋值只复制引用；<code>list.copy()</code>、切片和 <code>dict.copy()</code> 是浅拷贝，嵌套对象仍共享。策略参数、持仓快照或订单对象若意外共享引用，会让历史状态被后续修改污染。必要时使用 <code>copy.deepcopy</code>，或设计不可变数据结构。</p><p>函数默认参数在定义时只创建一次，因此应使用 <code>None</code> 作为默认值，并在函数内部创建 list 或 dict，不能写可变默认参数。</p>` },
+  { p: 2, q: '如何为 Python 回测和交易代码设计可测试、可复现的工程结构？', a: `<ul><li>将数据、信号、组合、成本模型、撮合、风险和报告拆分；策略函数尽量是纯函数。</li><li>固定随机种子并记录代码版本、数据版本、参数、交易日历与依赖版本；结果应可复跑。</li><li>单元测试覆盖收益计算、订单状态机、手续费、滑点、拆分/除权和边界日期；属性测试可检查资金守恒等不变量。</li><li>生产入口加入结构化日志、指标、告警和异常恢复，避免 Notebook 成为唯一运行环境。</li></ul>` },
+  { p: 3, q: 'C++ 中 RAII、智能指针和异常安全为什么对交易系统重要？', a: `<p><b>RAII</b> 让资源在对象构造时获取、在析构时释放，无论正常返回还是抛异常都能释放 socket、文件、锁和内存。</p><ul><li><code>std::unique_ptr</code>：独占所有权，移动不复制，通常是默认选择。</li><li><code>std::shared_ptr</code>：共享所有权但有引用计数开销；循环引用需用 <code>std::weak_ptr</code> 打破。</li><li>不要用裸指针表达所有权；裸指针或引用更适合作为不拥有对象的短期观察者。</li></ul><p>低延迟路径通常避免频繁动态分配和异常展开，但不应放弃 RAII；使用对象池、预分配缓冲区和确定的生命周期。</p>` },
+  { p: 3, q: 'C++ STL 容器和算法在订单簿或行情处理中如何选择？', a: `<table><tr><th>场景</th><th>常见选择</th><th>注意点</th></tr><tr><td>顺序行情、连续存储</td><td><code>std::vector</code></td><td>缓存友好；提前 <code>reserve</code>，扩容会使迭代器/指针失效</td></tr><tr><td>价格到数量的稀疏映射</td><td><code>std::unordered_map</code></td><td>平均 O(1)，考虑哈希质量、rehash 和最坏情况</td></tr><tr><td>按价格排序并取最优档位</td><td><code>std::map</code> 或有序数组</td><td>map 是 O(log n)；小而稳定的档位数组可能更快</td></tr></table><p>先以正确的复杂度和数据生命周期设计，再用 profile 决定是否替换容器。</p>` },
+  { p: 3, q: 'C++ 并发中数据竞争、原子操作和内存序如何理解？', a: `<p><b>数据竞争</b>是多个线程并发访问同一内存且至少一个写、又没有同步；在 C++ 中属于未定义行为。互斥量适合复合状态的一致性，<code>std::atomic</code> 适合简单计数器、标志位或无锁协议。</p><ul><li><code>memory_order_relaxed</code> 只保证该原子变量的原子性，不建立其他读写的顺序。</li><li>发布数据常用 release store，读取方用 acquire load；配对后读取方可看到发布前写入的数据。</li><li><code>seq_cst</code> 更容易推理但约束更强；除非已证明正确，不要为了性能随意放宽内存序。</li></ul><p>更安全的起点是单写者队列、清晰的所有权转移和有界队列背压；无锁结构还需验证 ABA、伪共享、溢出与停机流程。</p>` },
+  { p: 2, q: '如何定位 C++ 低延迟链路的抖动，而不只看平均耗时？', a: `<p>关注 p50、p95、p99、p99.9 和最大值，按行情接收、策略、风控、下单、网络发送分别打点。常见抖动源包括：内存分配、锁竞争、系统调用、缺页、缓存未命中、CPU 迁移、日志阻塞和网络缓冲。</p><ul><li>先用采样 profiler、<code>perf</code>、火焰图和 trace 找热点，再优化。</li><li>预分配、批处理、对象池、缓存行对齐和 CPU affinity 只在测量证明有效时使用。</li><li>压测必须接近真实峰值行情和订单模式，并记录丢包、排队长度、拒单与恢复行为。</li></ul><p>低延迟不等于牺牲正确性：风险检查、幂等性、时钟同步和故障恢复仍是硬约束。</p>` },
+);
+
 const KEY = 'fs-interview-mastered-v1';
 let mastered = {};
 try { mastered = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { mastered = {}; }
