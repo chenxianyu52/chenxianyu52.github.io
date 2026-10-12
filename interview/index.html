@@ -6312,6 +6312,135 @@ quantItems.push(
   { p: 2, q: '如何定位 C++ 低延迟链路的抖动，而不只看平均耗时？', a: `<p>关注 p50、p95、p99、p99.9 和最大值，按行情接收、策略、风控、下单、网络发送分别打点。常见抖动源包括：内存分配、锁竞争、系统调用、缺页、缓存未命中、CPU 迁移、日志阻塞和网络缓冲。</p><ul><li>先用采样 profiler、<code>perf</code>、火焰图和 trace 找热点，再优化。</li><li>预分配、批处理、对象池、缓存行对齐和 CPU affinity 只在测量证明有效时使用。</li><li>压测必须接近真实峰值行情和订单模式，并记录丢包、排队长度、拒单与恢复行为。</li></ul><p>低延迟不等于牺牲正确性：风险检查、幂等性、时钟同步和故障恢复仍是硬约束。</p>` },
 );
 
+Object.assign(EXTRA, {
+  'quant-10': `<pre><code># I/O 密集：单线程并发处理多个行情连接
+import asyncio
+
+async def consume(symbol):
+    while True:
+        tick = await read_tick(symbol)   # 等待网络时让出控制权
+        await publish_tick(tick)
+
+async def main():
+    await asyncio.gather(*(consume(s) for s in ['SPY', 'QQQ']))
+
+# CPU 密集：用进程绕开 GIL（任务和结果必须可序列化）
+from concurrent.futures import ProcessPoolExecutor
+with ProcessPoolExecutor() as pool:
+    results = list(pool.map(run_backtest, parameter_sets))</code></pre>
+<p>协程不使 CPU 计算并行；上例中网络等待可并发，而每个 <code>run_backtest</code> 运行在独立进程。</p>`,
+  'quant-11': `<pre><code>import pandas as pd
+
+# 信号只能使用当日收盘前已知数据；仓位向后移一日再计算收益
+fast = close.rolling(20, min_periods=20).mean()
+slow = close.rolling(60, min_periods=60).mean()
+signal = (fast &gt; slow).astype('int8')
+position = signal.shift(1).fillna(0)    # 防止未来函数
+gross_return = position * close.pct_change().fillna(0)
+
+# pandas 按 index 对齐；赋值前显式对齐并检查时间序列
+assert close.index.is_monotonic_increasing
+assert close.index.equals(signal.index)</code></pre>`,
+  'quant-12': `<pre><code>from dataclasses import dataclass, field
+from copy import deepcopy
+
+@dataclass
+class Order:
+    symbol: str
+    fills: list[float] = field(default_factory=list)  # 每个订单独立 list
+
+original = {'positions': {'AAPL': 100}}
+snapshot = deepcopy(original)           # 账本快照不能共享嵌套 dict
+original['positions']['AAPL'] = 50
+assert snapshot['positions']['AAPL'] == 100
+
+def add_fill(fill, fills=None):
+    fills = [] if fills is None else fills
+    fills.append(fill)
+    return fills</code></pre>`,
+  'quant-13': `<pre><code>from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Fill:
+    quantity: int
+    price: float
+    fee: float
+
+def apply_fill(cash: float, position: int, fill: Fill) -&gt; tuple[float, int]:
+    return cash - fill.quantity * fill.price - fill.fee, position + fill.quantity
+
+def test_apply_fill_preserves_accounting():
+    cash, position = apply_fill(10_000, 0, Fill(10, 100, 1))
+    assert (cash, position) == (8_999, 10)
+
+# 在实际项目中还要记录数据版本、参数、随机种子和交易日历。</code></pre>`,
+  'quant-14': `<pre><code>#include &lt;memory&gt;
+#include &lt;mutex&gt;
+
+class OrderGateway {
+public:
+    explicit OrderGateway(int socket) : socket_(socket) {}
+    ~OrderGateway() { close(socket_); }       // 无论如何退出都会释放资源
+    OrderGateway(const OrderGateway&amp;) = delete;
+    OrderGateway(OrderGateway&amp;&amp;) = default;
+private:
+    int socket_;
+};
+
+void update_book(Book&amp; book) {
+    std::lock_guard&lt;std::mutex&gt; lock(book.mutex); // 异常时也自动解锁
+    book.apply();
+}</code></pre>
+<p>生产代码通常应以封装的 socket 类代替裸文件描述符；所有权由对象生命周期表达，而非靠调用者记住释放。</p>`,
+  'quant-15': `<pre><code>#include &lt;vector&gt;
+#include &lt;unordered_map&gt;
+
+struct Level { long price; long quantity; };
+
+std::vector&lt;Level&gt; levels;
+levels.reserve(200);               // 预分配，避免高峰时扩容
+levels.push_back({10125, 50});
+
+std::unordered_map&lt;long, std::size_t&gt; index_by_price;
+index_by_price.reserve(256);       // 降低 rehash 概率
+index_by_price[10125] = levels.size() - 1;
+
+// 删除 vector 中间元素会移动后续元素；订单簿需同步更新索引或使用惰性删除。</code></pre>`,
+  'quant-16': `<pre><code>#include &lt;atomic&gt;
+
+struct Snapshot { long best_bid; long best_ask; };
+Snapshot book;
+std::atomic&lt;bool&gt; published{false};
+
+// 写线程：先写完整快照，再发布标志
+void writer() {
+    book = {10125, 10130};
+    published.store(true, std::memory_order_release);
+}
+
+// 读线程：acquire 后可见 writer 在 release 前的写入
+Snapshot reader() {
+    while (!published.load(std::memory_order_acquire)) {}
+    return book;
+}</code></pre>
+<p>这只是说明 acquire/release 的发布模式；真实系统仍需要处理重复发布、对象生命周期、多读者和停止信号。</p>`,
+  'quant-17': `<pre><code>#include &lt;algorithm&gt;
+#include &lt;chrono&gt;
+#include &lt;vector&gt;
+
+std::vector&lt;long long&gt; latency_ns;
+latency_ns.reserve(1'000'000);
+
+auto start = std::chrono::steady_clock::now();
+send_order(order);
+auto end = std::chrono::steady_clock::now();
+latency_ns.push_back(std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(end - start).count());
+
+std::sort(latency_ns.begin(), latency_ns.end());
+auto p99 = latency_ns[latency_ns.size() * 99 / 100];
+// 生产中使用环形缓冲区或分位数直方图，避免在热路径排序和分配。</code></pre>`,
+});
+
 const KEY = 'fs-interview-mastered-v1';
 let mastered = {};
 try { mastered = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { mastered = {}; }
