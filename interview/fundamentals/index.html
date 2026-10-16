@@ -20,16 +20,15 @@ const sections=[
 [3,'Cookie、Session 和 JWT 如何选择？',`<p>Session 把状态放服务端，浏览器 Cookie 带 session id；JWT 通常是服务端签名、客户端携带的自包含 token。JWT 便于无状态扩容，但撤销、权限实时更新和体积需要额外设计。</p><p>Web 场景中 Cookie 应使用 <code>HttpOnly</code>、<code>Secure</code>、合适的 <code>SameSite</code>；无论哪种，服务端必须验证身份与权限。</p>`],
 [2,'HTTPS 如何保证安全？',`<p>TLS 通过证书验证服务端身份，利用非对称加密协商密钥，后续用高效对称加密保护传输内容，并通过完整性校验防篡改。HTTPS 不能防止业务权限错误、XSS 或服务端泄漏。</p>`]
 ]},
-{id:'language',title:'编程语言与并发',note:'Java / Go / Python 基础',items:[
+{id:'language',title:'Java / Kotlin 与并发',note:'JVM 服务端基础',items:[
 [3,'进程、线程和协程有什么区别？',`<p>进程有独立地址空间，隔离强；线程共享进程内存，需要同步；协程由语言运行时调度，适合大量 I/O 等待。CPU 密集计算仍需要多核并行能力，例如线程池、进程池或原生计算。</p><p>无论使用何种模型，都要有超时、取消、并发上限和背压，避免任务无限堆积。</p>`],
 [3,'Java 中 HashMap 为什么需要扩容？线程安全吗？',`<p>HashMap 用数组加桶组织键值对，负载因子过高会导致冲突增多，因此达到阈值后扩容并重新分布。它不是线程安全的，并发读写可能数据错误；需要并发场景用 <code>ConcurrentHashMap</code>，或用锁保护复合操作。</p>`],
-[3,'Python GIL 对服务开发有什么影响？',`<p>GIL 让 CPython 通常一次只执行一个线程的 Python 字节码。I/O 密集工作可用线程或 <code>asyncio</code>；CPU 密集工作使用多进程、NumPy/Numba 或 C/C++ 扩展。GIL 不等于 Python 不能并发。</p>`],
-[2,'Go 的 goroutine 和 channel 如何理解？',`<p>goroutine 是由 Go runtime 调度的轻量执行单元；channel 用于在 goroutine 间安全传递数据和同步。它们不自动解决泄漏或死锁：要设置 context 取消、channel 容量、关闭责任和超时。</p><pre><code>select {
-case result := &lt;-results:
-    return result
-case &lt;-ctx.Done():
-    return ctx.Err()
-}</code></pre>`],
+[3,'Kotlin 协程的 suspend、Dispatcher 和 structured concurrency 如何理解？',`<p><code>suspend</code> 表示函数可以挂起而不阻塞线程；<code>Dispatcher</code> 决定协程运行的线程池；结构化并发让子协程受父 scope 管理，父任务取消时子任务也会取消，避免后台任务泄漏。</p><pre><code>suspend fun loadOrder(id: String): Order = coroutineScope {
+  val order = async(Dispatchers.IO) { orderApi.get(id) }
+  val profile = async(Dispatchers.IO) { userApi.get(order.await().userId) }
+  Order(order.await(), profile.await())
+}</code></pre><p>服务端要传递超时和取消信号，不能无边界地创建协程或把阻塞 I/O 放在默认计算调度器。</p>`],
+[2,'Java 虚拟线程与传统线程池如何选择？',`<p>传统线程池限制并发线程数，适合 CPU 密集工作或需要显式隔离资源的场景。Java 虚拟线程适合大量阻塞 I/O 任务，降低“一个请求占一个平台线程”的成本，但数据库连接、下游服务和 CPU 仍是有限资源。</p><p>无论是否使用虚拟线程，都要设请求超时、连接池上限、限流和背压；虚拟线程不能让下游容量无限。</p>`],
 [2,'什么是数据竞争？如何避免？',`<p>多个执行单元同时访问同一可变数据，至少一个写且没有正确同步，就是数据竞争。用不可变数据、消息传递、互斥锁、原子变量或单线程所有者模型避免；先保证正确性，再考虑无锁优化。</p>`],
 [2,'异常、错误码和重试如何协作？',`<p>在进程内用异常或 Result 表达失败；跨 HTTP/API 用稳定错误码和状态码。仅对可恢复的瞬时失败重试，采用超时、指数退避和抖动；写操作要有幂等键，防止重试造成重复副作用。</p>`]
 ]},

@@ -22,7 +22,7 @@ const sections=[
 [3,'从输入 URL 到页面出现，浏览器和服务端经历了什么？',`<p>典型路径：DNS 解析 → 建立 TCP 连接（HTTPS 还要 TLS 握手）→ 发送 HTTP 请求 → CDN/负载均衡/网关 → 应用与数据库/缓存 → 返回 HTML/CSS/JS → 浏览器解析、布局、绘制和合成。</p><p>排查慢页面时分段测量：DNS、连接、TTFB、资源下载、JS 执行和渲染。优化不应只盯后端接口，也要考虑 CDN、缓存、资源体积和渲染阻塞。</p>`],
 [3,'HTTP 常见方法、幂等性和状态码如何理解？',`<table><tr><th>方法</th><th>常见语义</th><th>是否天然幂等</th></tr><tr><td>GET</td><td>读取资源</td><td>是</td></tr><tr><td>POST</td><td>创建资源或执行命令</td><td>通常否，需业务幂等键</td></tr><tr><td>PUT</td><td>按 URI 整体替换</td><td>是</td></tr><tr><td>PATCH</td><td>局部更新</td><td>取决于补丁语义</td></tr><tr><td>DELETE</td><td>删除资源</td><td>通常是</td></tr></table><p>常见状态码：<code>400</code> 参数错误、<code>401</code> 未认证、<code>403</code> 无权限、<code>404</code> 不存在、<code>409</code> 冲突、<code>429</code> 限流、<code>5xx</code> 服务端/依赖失败。</p>`],
 [3,'数据库索引为什么能加速查询？哪些情况下会失效？',`<p>B+ 树索引通过有序结构减少磁盘页访问；联合索引通常遵循最左前缀。索引不是越多越好，会增加写入、空间和维护成本。</p><ul><li>对索引列使用函数、隐式类型转换、前导通配符 <code>LIKE '%x'</code>，常导致无法有效使用索引。</li><li>选择性很低的列（如布尔值）单独建索引收益有限。</li><li>使用 <code>EXPLAIN</code> 看执行计划、扫描行数和是否回表；不要仅凭直觉加索引。</li></ul>`],
-[3,'进程、线程、协程分别是什么？服务端如何选择并发模型？',`<p><b>进程</b>拥有独立地址空间，隔离强但切换/通信成本更高；<b>线程</b>共享进程内存，适合阻塞 I/O 与并行计算，但要同步共享状态；<b>协程</b>通常由运行时调度，适合大量 I/O 等待，但 CPU 密集仍需线程/进程池。</p><p>选择取决于语言运行时和工作负载：Java 可用虚拟线程/线程池，Go 用 goroutine，Python 的 CPU 任务常用多进程或原生计算。无论模型如何，都必须有超时、并发上限、取消和背压。</p>`],
+[3,'进程、线程、协程分别是什么？Java/Kotlin 服务端如何选择并发模型？',`<p><b>进程</b>拥有独立地址空间，隔离强但切换/通信成本更高；<b>线程</b>共享进程内存，适合阻塞 I/O 与并行计算，但要同步共享状态；<b>协程</b>通常由运行时调度，适合大量 I/O 等待，但 CPU 密集仍需线程池。</p><p>Java 可用受控线程池或虚拟线程；Kotlin 用协程和结构化并发。无论模型如何，都必须有超时、并发上限、取消、连接池限制和背压。</p>`],
 [2,'Linux 上接口异常时，先看什么？',`<p>先确认影响范围与最近变更，再看应用日志和系统资源：<code>top/htop</code> 看 CPU/内存，<code>free</code> 看内存，<code>df -h</code> 看磁盘，<code>ss -lntp</code> 看端口与连接，<code>lsof -p PID</code> 看 FD，<code>journalctl</code> 或容器日志看错误。</p><p>不要一上来重启。先保留证据，检查 OOM、磁盘写满、连接池耗尽、线程池排队和下游超时，再按影响做回滚、限流或扩容。</p>`],
 [2,'Git merge、rebase、cherry-pick 的区别和协作原则？',`<p><code>merge</code> 保留分支合并历史；<code>rebase</code> 把提交重放到新基线，使本地线性但会改写 commit hash；<code>cherry-pick</code> 选择性应用某个提交。</p><p>原则：不随意 rebase 已被他人基于其开发的共享分支；小而聚焦的 PR；合并前跑测试；冲突时理解两边意图而不是机械选一边。生产热修复可用 cherry-pick，但要确认依赖与回归。</p>`],
 [2,'Docker 镜像、容器、Volume 和网络分别是什么？',`<p>镜像是不可变分层模板，容器是其运行实例；容器文件系统是临时的，数据库等持久数据使用 Volume；容器通过网络互联，应用用服务名发现依赖而不是写死 IP。</p><pre><code># 多阶段构建：运行镜像不包含构建工具
@@ -49,7 +49,7 @@ COPY --from=build /app/dist /usr/share/nginx/html</code></pre><p>镜像应使用
 return legacyCheckout(request)</code></pre><p>不要把 Flag 当永久分支。功能稳定后删除旧路径和 Flag，避免配置债。</p>`],
 [2,'如何处理与外部系统集成的不稳定性？',`<p>先定义超时、重试条件、幂等键、降级行为与对账机制。只对瞬时故障重试，并使用指数退避和抖动；写操作必须保证幂等，避免重试重复扣款或重复创建。</p><div class="tip">回答时要区分“调用成功”和“业务最终一致”：网络超时后对方可能已经成功，因此需要查询、回调或对账确认。</div>`]
 ]},
-{id:'backend',title:'服务端、数据与分布式',note:'Go / Python / Java，API / 缓存 / MQ',items:[
+{id:'backend',title:'Java / Kotlin 服务端、数据与分布式',note:'Spring Boot / API / 缓存 / MQ',items:[
 [3,'如何设计一个可靠的创建订单 API？',`<p>使用资源化 URL 与明确状态码；请求带 <code>Idempotency-Key</code>，服务端将 key、请求摘要与结果持久化。重复请求返回首次结果，而不是重复创建订单。</p><pre><code>POST /orders
 Idempotency-Key: 9b6...
 
@@ -64,7 +64,7 @@ COMMIT;</code></pre><p>关键点：幂等记录与订单写入在同一事务中
 UPDATE orders SET status = 'PAID' WHERE id = :id;
 INSERT INTO outbox(id, type, payload) VALUES (:eventId, 'OrderPaid', :json);
 COMMIT;</code></pre>`],
-[2,'Go、Python、Java 如何按服务场景选择？',`<p>没有绝对优劣。Go 适合高并发网络服务、较低部署复杂度；Java 生态成熟，适合复杂领域、企业框架和 JVM 观测；Python 适合数据、AI、快速迭代，但 CPU 密集工作要关注 GIL、进程和原生计算。</p><p>选择要结合团队技能、依赖生态、延迟/吞吐目标和已有基础设施，并统一 API、日志、监控、测试与发布规范。</p>`]
+[2,'Java 和 Kotlin 如何在服务端项目中协作？',`<p>Kotlin 与 Java 可以在同一 JVM 和 Spring Boot 项目中互操作。新业务可优先 Kotlin：空安全、data class、扩展函数和协程能提高表达力；存量 Java 模块逐步演进，避免为“统一语言”做大规模无收益重写。</p><p>边界上要注意 Kotlin 的可空类型与 Java platform type、默认参数的 Java 调用方式、集合可变性和协程与阻塞框架的线程模型。统一代码规范、异常处理、日志、测试和依赖管理比语言本身更重要。</p>`]
 ]},
 {id:'web',title:'Web、跨端与用户体验',note:'React / Vue / Flutter / React Native',items:[
 [3,'React 中如何避免不必要重渲染？',`<p>先通过 React DevTools Profiler 定位，再优化。保持 state 靠近实际使用处；传递稳定、最小化的 props；列表使用稳定 key；昂贵派生计算才用 <code>useMemo</code>，回调引用导致子组件重渲染时才用 <code>useCallback</code>。</p><p>不要把所有组件包进 <code>memo</code>。真正重要的是状态边界、数据结构和组件拆分。</p>`],
