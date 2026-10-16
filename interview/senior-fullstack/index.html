@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>资深全栈工程师 · 岗位定制题库</title>
+<style>
+:root{--ink:#182433;--muted:#607080;--line:#dce3eb;--paper:#fff;--ground:#f3f6f9;--brand:#2563b8;--soft:#eaf2fc;--high:#c2410c;--medium:#a16207;--low:#64748b;--ok:#15803d}*{box-sizing:border-box}body{margin:0;font:14px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--ground)}header{position:sticky;top:0;z-index:2;padding:14px 24px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}h1{margin:0;font-size:21px;letter-spacing:0}.sub{margin:2px 0 0;color:var(--muted);font-size:13px}.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.tools input{flex:1 1 260px;min-width:190px;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font:inherit}.tools button{border:1px solid var(--line);border-radius:6px;background:#fff;padding:6px 10px;color:var(--ink);cursor:pointer;font:inherit;font-size:13px}.tools button.active{color:#fff;background:var(--brand);border-color:var(--brand)}.progress{margin-left:auto;color:var(--muted);font-size:13px}.wrap{max-width:1280px;margin:auto;display:flex;gap:20px;padding:20px 24px 60px}nav{position:sticky;top:128px;align-self:flex-start;width:225px;max-height:calc(100vh - 150px);overflow:auto;padding:8px;background:#fff;border:1px solid var(--line);border-radius:8px}nav a{display:flex;justify-content:space-between;padding:5px 8px;border-radius:5px;color:var(--ink);text-decoration:none;font-size:13px}nav a:hover{background:var(--soft);color:var(--brand)}main{min-width:0;flex:1}.section{scroll-margin-top:135px;margin:0 0 28px}.section h2{margin:0 0 10px;border-left:4px solid var(--brand);padding-left:9px;font-size:17px}.note{margin-left:8px;color:var(--muted);font-size:12px;font-weight:400}details{margin:8px 0;background:var(--paper);border:1px solid var(--line);border-radius:8px;scroll-margin-top:135px}details[hidden],.section[hidden],nav a[hidden]{display:none}summary{display:flex;align-items:center;gap:9px;padding:10px 12px;cursor:pointer;font-weight:650;list-style:none}summary::-webkit-details-marker{display:none}summary:before{content:"▸";color:var(--brand)}details[open] summary:before{transform:rotate(90deg)}.num{min-width:34px;color:var(--muted);font-size:12px;font-weight:500}.question{flex:1}.badge{font-size:11px;letter-spacing:1px;white-space:nowrap}.p3{color:var(--high)}.p2{color:var(--medium)}.p1{color:var(--low)}.mark{border:1px solid var(--line);border-radius:12px;background:#fff;padding:1px 8px;color:var(--muted);font-size:11px;cursor:pointer}.mark.on{background:var(--ok);border-color:var(--ok);color:#fff}.answer{border-top:1px dashed var(--line);padding:4px 18px 15px 54px}.answer p,.answer ul,.answer ol,.answer pre,.answer table,.tip{margin:8px 0}.answer ul,.answer ol{padding-left:20px}.answer li{margin:3px 0}.answer code{font:12px "SF Mono",Menlo,Consolas,monospace;background:#eef2f6;padding:0 4px;border-radius:3px}.answer pre{overflow:auto;padding:12px;border-radius:6px;background:#132033;color:#e5edf6;line-height:1.55}.answer pre code{padding:0;background:none;color:inherit}.answer table{width:100%;border-collapse:collapse;font-size:13px}.answer th,.answer td{padding:5px 8px;border:1px solid var(--line);text-align:left;vertical-align:top}.answer th{background:#f6f8fa}.tip{padding:8px 10px;background:#fff8e5;border:1px solid #f5dd9a;border-radius:6px;font-size:13px}.empty{padding:60px 0;text-align:center;color:var(--muted)}@media(max-width:800px){header{padding:12px 14px}.wrap{padding:14px}.answer{padding-left:18px}nav{display:none}.progress{margin-left:0}}
+</style>
+</head>
+<body>
+<header><h1>资深全栈工程师 · 岗位定制题库</h1><p class="sub">服务端架构、Web、跨端、Agent、稳定性与端到端交付。先口述，再展开核对。</p><div class="tools"><input id="search" type="search" placeholder="搜索：事务、幂等、React、RAG、Kubernetes"><button class="active" data-level="0">全部</button><button data-level="3">★★★ 必考</button><button data-level="2">★★ 常考</button><button data-level="1">★ 加分</button><button id="random">随机抽题</button><button id="expand">展开</button><button id="collapse">收起</button><span class="progress" id="progress"></span></div></header>
+<div class="wrap"><nav id="toc"></nav><main id="app"></main></div>
+<script>
+const sections=[
+{id:'delivery',title:'端到端交付与架构',note:'岗位职责 1 / 6 / 7',items:[
+[3,'如何负责一个复杂业务功能从需求到上线？',`<p>先将需求拆成<b>业务目标、范围、非功能约束和可验收指标</b>，再设计 UI、API、数据模型、权限、异常和灰度方案。上线前完成测试、监控、回滚预案和数据校验；上线后观察核心指标、错误率和用户反馈。</p><p>对不确定性要明确假设与风险，例如外部系统 SLA、数据迁移量、兼容版本。不要只讲“开发完成”，要讲清楚如何让功能可观测、可灰度、可回滚。</p>`],
+[3,'如何拆分一个服务端业务模块的边界？',`<p>按<b>业务能力和数据所有权</b>划分，而不是按表或技术层硬拆。模块应拥有自己的领域规则和写模型；跨模块通过稳定 API 或事件协作，避免其他服务直接写它的数据库。</p><ul><li>先做模块化单体，边界清晰但部署简单；只有独立伸缩、不同发布节奏或团队边界明显时再拆服务。</li><li>接口传递面向业务的 DTO/事件，不泄露内部表结构。</li><li>把同步调用链控制在可用性预算内，非关键后续动作优先异步化。</li></ul>`],
+[3,'系统设计题中，如何在交付速度、成本和长期可维护性之间取舍？',`<p>先问清流量、SLA、数据一致性、团队规模和上线窗口。先选择满足当前约束的<b>最简单可演进方案</b>：例如单体加模块边界、托管数据库、Redis、异步任务，而非一开始引入多个微服务和复杂基础设施。</p><p>明确技术债的偿还条件：当 QPS、团队人数、故障频率或部署耦合超过阈值时，再拆分或替换组件。用指标而不是“未来可能会很大”驱动复杂度。</p>`],
+[2,'如何设计配置、Feature Flag 与灰度发布？',`<p>配置有版本、校验、默认值和审计；Flag 与业务代码解耦，支持按用户、地区、客户端版本或百分比命中。灰度必须配套指标、快速关闭开关和回滚路径。</p><pre><code>if (featureFlags.isEnabled("new_checkout", userId)) {
+    return newCheckout(request)
+}
+return legacyCheckout(request)</code></pre><p>不要把 Flag 当永久分支。功能稳定后删除旧路径和 Flag，避免配置债。</p>`],
+[2,'如何处理与外部系统集成的不稳定性？',`<p>先定义超时、重试条件、幂等键、降级行为与对账机制。只对瞬时故障重试，并使用指数退避和抖动；写操作必须保证幂等，避免重试重复扣款或重复创建。</p><div class="tip">回答时要区分“调用成功”和“业务最终一致”：网络超时后对方可能已经成功，因此需要查询、回调或对账确认。</div>`]
+]},
+{id:'backend',title:'服务端、数据与分布式',note:'Go / Python / Java，API / 缓存 / MQ',items:[
+[3,'如何设计一个可靠的创建订单 API？',`<p>使用资源化 URL 与明确状态码；请求带 <code>Idempotency-Key</code>，服务端将 key、请求摘要与结果持久化。重复请求返回首次结果，而不是重复创建订单。</p><pre><code>POST /orders
+Idempotency-Key: 9b6...
+
+BEGIN;
+INSERT INTO idempotency_keys(key, request_hash) ...;
+INSERT INTO orders(...) VALUES (...);
+COMMIT;</code></pre><p>关键点：幂等记录与订单写入在同一事务中；对 key 冲突读取已完成或处理中结果；日志包含 trace id，不记录敏感信息。</p>`],
+[3,'数据库事务隔离级别和常见并发问题？',`<table><tr><th>问题</th><th>含义</th><th>常见处理</th></tr><tr><td>脏读</td><td>读到未提交数据</td><td>Read Committed 以上</td></tr><tr><td>不可重复读</td><td>同一行两次读取结果不同</td><td>更高隔离或显式锁</td></tr><tr><td>幻读</td><td>范围查询出现新行</td><td>可串行化或数据库 MVCC/谓词锁机制</td></tr><tr><td>丢失更新</td><td>并发写覆盖彼此</td><td>乐观锁版本号或条件更新</td></tr></table><p>隔离级别越高并非总是越好，会增加锁等待或重试成本。根据业务选择，例如库存扣减可用条件更新：<code>UPDATE stock SET n=n-1 WHERE id=? AND n&gt;0</code>。</p>`],
+[3,'缓存穿透、击穿、雪崩分别是什么？',`<ul><li><b>穿透：</b>反复查询不存在的数据，缓存和数据库都被打到。使用参数校验、空值缓存、布隆过滤器。</li><li><b>击穿：</b>热点 key 同时过期，大量请求回源。使用互斥重建、逻辑过期或提前刷新。</li><li><b>雪崩：</b>大量 key 同时失效或缓存集群故障。TTL 加随机值、多级缓存、限流降级、缓存集群高可用。</li></ul><p>缓存不是数据库真相；写入后的失效/更新策略和一致性边界必须说清楚。</p>`],
+[3,'什么时候使用消息队列？如何保证可靠消费？',`<p>适用于削峰、异步处理、服务解耦、广播事件。生产者需确认投递；消费者需幂等并在成功后提交 offset/ack；失败重试有上限，进入死信队列后告警和人工/自动补偿。</p><p>“至少一次”是常见语义，所以业务必须处理重复消息。端到端恰好一次通常是业务幂等、去重表和事务/Outbox 的组合，不是简单勾选 MQ 配置。</p>`],
+[2,'什么是 Outbox，如何避免“写库成功但消息没发”？',`<p>在同一数据库事务内写入业务数据和 outbox 事件表；后台发布器可靠地读取未发事件、投递到 MQ，并记录投递状态。消费者用事件 ID 去重。</p><pre><code>BEGIN;
+UPDATE orders SET status = 'PAID' WHERE id = :id;
+INSERT INTO outbox(id, type, payload) VALUES (:eventId, 'OrderPaid', :json);
+COMMIT;</code></pre>`],
+[2,'Go、Python、Java 如何按服务场景选择？',`<p>没有绝对优劣。Go 适合高并发网络服务、较低部署复杂度；Java 生态成熟，适合复杂领域、企业框架和 JVM 观测；Python 适合数据、AI、快速迭代，但 CPU 密集工作要关注 GIL、进程和原生计算。</p><p>选择要结合团队技能、依赖生态、延迟/吞吐目标和已有基础设施，并统一 API、日志、监控、测试与发布规范。</p>`]
+]},
+{id:'web',title:'Web、跨端与用户体验',note:'React / Vue / Flutter / React Native',items:[
+[3,'React 中如何避免不必要重渲染？',`<p>先通过 React DevTools Profiler 定位，再优化。保持 state 靠近实际使用处；传递稳定、最小化的 props；列表使用稳定 key；昂贵派生计算才用 <code>useMemo</code>，回调引用导致子组件重渲染时才用 <code>useCallback</code>。</p><p>不要把所有组件包进 <code>memo</code>。真正重要的是状态边界、数据结构和组件拆分。</p>`],
+[3,'如何设计前后端 API 契约与错误处理？',`<p>契约包含请求/响应 schema、字段语义、枚举、分页、版本兼容和错误码。前端区分可恢复业务错误、认证错误、网络错误和未知错误；服务端返回稳定错误码，面向用户的信息可本地化，诊断信息放日志和 trace。</p><pre><code>{
+  "code": "INVENTORY_INSUFFICIENT",
+  "message": "库存不足",
+  "traceId": "..."
+}</code></pre>`],
+[2,'复杂表单如何保证体验和数据正确性？',`<p>前端做即时格式与必填校验，后端做最终可信校验；提交期间禁用重复提交或携带幂等键。草稿、自动保存、离开确认、失败重试和字段级错误应由业务风险决定。</p><p>对于金额、日期、时区、手机号等字段，前后端必须共用明确格式与边界规则，不能依赖浏览器默认行为。</p>`],
+[2,'如何选择 Web、Flutter 和 React Native？',`<p>Web 适合覆盖广、迭代快的业务和运营场景；Flutter 追求统一渲染与跨端一致性；React Native 适合团队已有 React 能力且需要复用 JS 生态。若涉及复杂原生能力、性能敏感交互或深度系统集成，原生端仍更可控。</p><p>选择看用户场景、平台能力、团队技能、交付周期和长期维护，不应只按技术潮流。</p>`],
+[2,'如何处理客服反馈的线上问题？',`<p>先收集可定位信息：账号脱敏标识、时间、端版本、网络、trace id、操作路径和截图。按影响面与严重度分级，先止损再定位；需要数据修复时保证审计、幂等和回滚。</p><p>修复后补充监控、测试用例和知识库，避免同类问题再次依赖人工排查。</p>`]
+]},
+{id:'agent',title:'LLM、Agent 与 AI Coding',note:'加分项：LLM / Agent / RAG',items:[
+[3,'如何把 LLM Agent 安全地接入业务工作流？',`<p>将模型输出视为<b>不可信输入</b>。Agent 只能通过受控工具调用业务能力；工具要有严格 schema、权限校验、审计、速率限制、超时和幂等。高风险动作如支付、删除、发布必须由用户确认或规则引擎批准。</p><p>不要让模型直接拼 SQL、执行 shell 或拥有无限制 token。提示词不是安全边界。</p>`],
+[3,'RAG 的完整链路和常见质量问题？',`<ol><li>文档解析、去噪、分块并保留标题/权限/更新时间等元数据。</li><li>向量化并建立索引，查询时进行检索、过滤、重排。</li><li>将有限、可引用的上下文交给模型生成答案。</li><li>评估检索召回、答案正确性、引用完整性、延迟与成本。</li></ol><p>常见问题是分块不合理、索引过期、权限泄露、只看生成效果不看检索质量。需要离线评测集和线上反馈闭环。</p>`],
+[3,'如何评估 Agent 是否真正提升研发效率？',`<p>先定义任务和基线，例如 PRD 到可运行原型时间、测试覆盖、缺陷逃逸率、人工返工率、PR review 时长。对相似任务分组对照，记录人类介入、工具调用失败、成本和安全事件。</p><p>不要只统计调用次数或生成行数；可维护性、正确性和审核成本才是交付指标。</p>`],
+[2,'AI Coding 工具如何在团队中落地？',`<p>建立代码规范、架构约束、测试门槛和敏感信息规则；把仓库上下文、设计文档和受允许工具封装为 Skill/Agent。生成代码必须走现有 review、CI、安全扫描和人工验收。</p><div class="tip">面试可结合你的经验：产品、开发、测试、UI、发布角色拆分为 Agent，但真实质量门禁仍由测试和发布流程承担。</div>`],
+[2,'如何控制 LLM 成本、延迟和可用性？',`<p>缓存可复用结果，按任务路由到合适模型，限制上下文长度与工具轮数，流式返回改善感知延迟。对模型超时、限流和供应商故障提供降级、重试和熔断；记录 token、延迟、成功率和质量指标。</p>`]
+]},
+{id:'reliability',title:'部署、稳定性与可观测性',note:'Docker / Kubernetes / CI/CD / 高并发',items:[
+[3,'如何设计 CI/CD 流水线和安全发布？',`<p>典型链路：格式化/Lint → 单元测试 → 构建不可变制品 → 依赖与安全扫描 → 集成测试 → 部署测试环境 → 灰度生产 → 指标验证 → 完成或回滚。制品应可追溯到 commit、依赖版本和配置版本。</p><p>生产发布要有健康检查、容量预留、数据库迁移策略、回滚方案和变更审计；回滚应用不等于回滚数据，因此迁移采用向后兼容的 expand/contract 模式。</p>`],
+[3,'Kubernetes 中如何让服务具备基本可用性？',`<ul><li>设置 request/limit，避免单实例资源失控；区分 startup、readiness、liveness probe。</li><li>用多副本、反亲和/拓扑分布、HPA 和 PodDisruptionBudget 抵抗节点和发布扰动。</li><li>配置通过 ConfigMap/Secret 注入，密钥不写入镜像或日志。</li><li>优雅终止：先从 ready endpoints 移除，停止接收新请求，处理在途请求后退出。</li></ul>`],
+[3,'高并发系统如何做限流、熔断和降级？',`<p>在入口按用户、租户或 API 维度限流，常用令牌桶；服务调用设置超时、并发隔离和熔断；下游异常时返回缓存、默认结果或排队异步处理。每层的限额要协调，避免重试风暴。</p><pre><code>if (!rateLimiter.tryAcquire(userId)) {
+  return Response.status(429).header("Retry-After", "1").build()
+}</code></pre>`],
+[3,'如何建立可观测性来定位线上故障？',`<p>三件套：日志、指标、Trace。日志结构化且包含 trace id；指标覆盖请求量、错误率、延迟分位数、饱和度和业务成功率；分布式 Trace 串起跨服务调用。</p><p>告警要基于用户影响和错误预算，例如成功率下降或 p99 持续恶化，而不是每条异常日志都报警。</p>`],
+[2,'如何排查一次接口 p99 延迟飙升？',`<p>先按端点、区域、版本、租户和依赖拆分指标，确认是应用、数据库、缓存、网络还是下游。沿 Trace 找最长 span，结合 CPU、GC、线程池队列、连接池、慢 SQL 和缓存命中率验证假设。</p><p>先止损：回滚新版本、关闭高成本功能、限流或降级；再修根因，并把对应的指标/压测纳入发布门禁。</p>`]
+]},
+{id:'behavior',title:'项目表达与协作',note:'岗位匹配与行为面试',items:[
+[3,'为什么你适合这个资深全栈岗位？',`<p>回答应围绕岗位证据，而非泛泛列技术栈：我有 8 年大型 App/SDK 研发经验，长期参与 API 与数据模型协作；独立完成 Android/iOS/Web/隐私政策/CI/上架闭环；使用 TypeScript/React 和 Spring Boot 负责端到端功能；并已建立多角色 LLM Agent 工作流。</p><p>同时诚实说明服务端深度仍在持续积累，并以作品、可运行项目和系统设计能力证明转型不是停留在学习阶段。</p>`],
+[3,'讲一次跨团队接口或数据模型协作的案例。',`<p>用 STAR：先交代多模块/多市场的约束；说明你如何拉齐字段语义、兼容策略、错误码和发布顺序；再讲通过契约文档、联调环境、Feature Flag 和监控降低风险；最后用覆盖范围、上线结果或故障数据收尾。</p><div class="tip">可结合 eBay 能效标签：统一数据模型与渲染接口，复用到多个模块，并按地区和功能开关灰度。</div>`],
+[2,'业务方提出紧急需求但技术方案风险高，怎么处理？',`<p>先澄清不可变目标与上线时间，给出分阶段选项：最小可用方案、完整方案和不做的风险。每个方案明确成本、质量、数据/合规风险和回滚能力，由业务共同决策。</p><p>避免只说“不行”或悄悄承担不可控风险。资深工程师的价值是把技术约束转化为可决策的信息。</p>`],
+[2,'没有直接管理职责，如何推动问题解决？',`<p>通过事实、方案和执行降低协作摩擦：复现问题、量化影响、写清 owner/时间线/决策点，主动提供最小修复或 PoC。遇到分歧时回到用户影响、数据和可逆实验，而不是用职位压人。</p>`],
+[1,'面试中可以反问什么？',`<ul><li>团队当前最重要的业务指标与技术挑战分别是什么？</li><li>该岗位在服务端、Web、跨端和 Agent 之间的实际投入比例如何？</li><li>发布、事故响应和技术债治理是怎样运作的？</li><li>入职前三个月，什么结果算是成功？</li></ul>`]
+]}
+];
+const key='senior-fullstack-interview-mastered-v1';let mastered={};try{mastered=JSON.parse(localStorage.getItem(key))||{}}catch(e){}
+const app=document.querySelector('#app'),toc=document.querySelector('#toc'),search=document.querySelector('#search'),progress=document.querySelector('#progress');let level=0,total=0;const tocLinks={};
+sections.forEach((section,si)=>{const el=document.createElement('section');el.className='section';el.id=section.id;el.innerHTML=`<h2>${si+1}. ${section.title}<span class="note">${section.note}</span></h2>`;section.items.forEach((item,qi)=>{const id=`${section.id}-${qi}`;const d=document.createElement('details');d.dataset.id=id;d.dataset.level=item[0];d.dataset.text=(item[1]+' '+item[2]).toLowerCase();d.innerHTML=`<summary><span class="num">${si+1}.${qi+1}</span><span class="question">${item[1]}</span><span class="badge p${item[0]}">${'★'.repeat(item[0])}</span><button class="mark" type="button"></button></summary><div class="answer">${item[2]}</div>`;const mark=d.querySelector('.mark');const showMark=()=>{const on=!!mastered[id];mark.textContent=on?'已掌握':'标记掌握';mark.classList.toggle('on',on)};showMark();mark.onclick=e=>{e.preventDefault();e.stopPropagation();mastered[id]?delete mastered[id]:mastered[id]=true;localStorage.setItem(key,JSON.stringify(mastered));showMark();render()};el.append(d);total++});app.append(el);const link=document.createElement('a');link.href='#'+section.id;link.innerHTML=`${si+1}. ${section.title}<span></span>`;toc.append(link);tocLinks[section.id]=link});
+function render(){const word=search.value.trim().toLowerCase();let visible=0;document.querySelectorAll('details').forEach(d=>{const ok=(!word||d.dataset.text.includes(word))&&(!level||Number(d.dataset.level)===level);d.hidden=!ok;if(ok)visible++});sections.forEach(s=>{const sec=document.querySelector('#'+s.id),n=[...sec.querySelectorAll('details')].filter(d=>!d.hidden).length;sec.hidden=!n;tocLinks[s.id].hidden=!n;tocLinks[s.id].querySelector('span').textContent=n});const done=Object.keys(mastered).filter(id=>document.querySelector(`[data-id="${id}"]`)).length;progress.textContent=`已掌握 ${done} / ${total} · 当前 ${visible} 题`}document.querySelectorAll('[data-level]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-level]').forEach(x=>x.classList.remove('active'));b.classList.add('active');level=Number(b.dataset.level);render()});search.oninput=render;document.querySelector('#expand').onclick=()=>document.querySelectorAll('details:not([hidden])').forEach(x=>x.open=true);document.querySelector('#collapse').onclick=()=>document.querySelectorAll('details').forEach(x=>x.open=false);document.querySelector('#random').onclick=()=>{const pool=[...document.querySelectorAll('details:not([hidden])')];if(!pool.length)return;const d=pool[Math.floor(Math.random()*pool.length)];d.open=true;d.scrollIntoView({behavior:'smooth',block:'center'})};render();
+</script>
+</body>
+</html>
