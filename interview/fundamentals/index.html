@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>全栈基础题库</title>
+<style>
+:root{--ink:#172434;--muted:#637284;--line:#dbe3ec;--bg:#f4f7fa;--card:#fff;--brand:#16756d;--soft:#e5f4f1;--p3:#c2410c;--p2:#a16207;--p1:#64748b;--ok:#16803b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}header{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--line);padding:14px 24px}h1{margin:0;font-size:21px}.sub{margin:2px 0 0;color:var(--muted);font-size:13px}.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.tools input{flex:1 1 260px;min-width:190px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;font:inherit}.tools button{padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}.tools button.active{background:var(--brand);border-color:var(--brand);color:#fff}.progress{margin-left:auto;color:var(--muted);font-size:13px}.wrap{max-width:1280px;margin:auto;display:flex;gap:20px;padding:20px 24px 60px}nav{position:sticky;top:128px;align-self:flex-start;width:225px;max-height:calc(100vh - 150px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px}nav a{display:flex;justify-content:space-between;padding:5px 8px;border-radius:5px;color:var(--ink);text-decoration:none;font-size:13px}nav a:hover{background:var(--soft);color:var(--brand)}main{flex:1;min-width:0}.section{margin-bottom:28px;scroll-margin-top:132px}.section h2{margin:0 0 10px;padding-left:9px;border-left:4px solid var(--brand);font-size:17px}.note{margin-left:8px;color:var(--muted);font-size:12px;font-weight:400}details{margin:8px 0;border:1px solid var(--line);border-radius:8px;background:var(--card);scroll-margin-top:132px}details[hidden],.section[hidden],nav a[hidden]{display:none}summary{display:flex;align-items:center;gap:9px;padding:10px 12px;cursor:pointer;font-weight:650;list-style:none}summary::-webkit-details-marker{display:none}summary:before{content:"▸";color:var(--brand)}details[open] summary:before{transform:rotate(90deg)}.num{min-width:34px;color:var(--muted);font-size:12px;font-weight:500}.q{flex:1}.badge{font-size:11px;letter-spacing:1px;white-space:nowrap}.p3{color:var(--p3)}.p2{color:var(--p2)}.p1{color:var(--p1)}.mark{border:1px solid var(--line);border-radius:12px;padding:1px 8px;background:#fff;color:var(--muted);font-size:11px;cursor:pointer}.mark.on{background:var(--ok);border-color:var(--ok);color:#fff}.ans{border-top:1px dashed var(--line);padding:4px 18px 15px 54px}.ans p,.ans ul,.ans ol,.ans table,.ans pre,.tip{margin:8px 0}.ans ul,.ans ol{padding-left:20px}.ans li{margin:3px 0}.ans code{padding:0 4px;border-radius:3px;background:#eef2f5;font:12px "SF Mono",Menlo,Consolas,monospace}.ans pre{overflow:auto;padding:12px;border-radius:6px;background:#132034;color:#e4edf7;line-height:1.55}.ans pre code{padding:0;background:none;color:inherit}.ans table{width:100%;border-collapse:collapse;font-size:13px}.ans th,.ans td{padding:5px 8px;border:1px solid var(--line);text-align:left;vertical-align:top}.ans th{background:#f6f8fa}.tip{padding:8px 10px;border:1px solid #b9ded8;border-radius:6px;background:var(--soft);font-size:13px}.empty{padding:60px 0;text-align:center;color:var(--muted)}@media(max-width:800px){header{padding:12px 14px}.wrap{padding:14px}nav{display:none}.ans{padding-left:18px}.progress{margin-left:0}}
+</style>
+</head>
+<body>
+<header><h1>全栈基础题库</h1><p class="sub">从网络、语言、数据库到部署的底座。先刷这里，再进入岗位定制题库。</p><div class="tools"><input id="search" type="search" placeholder="搜索：TCP、索引、JWT、React、Docker"><button class="active" data-level="0">全部</button><button data-level="3">★★★ 必考</button><button data-level="2">★★ 常考</button><button data-level="1">★ 加分</button><button id="random">随机抽题</button><button id="expand">展开</button><button id="collapse">收起</button><span id="progress" class="progress"></span></div></header>
+<div class="wrap"><nav id="toc"></nav><main id="app"></main></div>
+<script>
+const sections=[
+{id:'network',title:'网络与 HTTP',note:'请求链路基础',items:[
+[3,'从输入 URL 到页面展示经历了什么？',`<p>DNS 解析域名 → TCP 三次握手（HTTPS 还包含 TLS 握手）→ 发送 HTTP 请求 → CDN/负载均衡/网关 → 应用、缓存、数据库 → 浏览器接收 HTML/CSS/JS → 解析、布局、绘制、合成。</p><p>排查慢页面应按 DNS、连接、TTFB、资源下载、JS 执行和渲染分段测量，不能只盯接口耗时。</p>`],
+[3,'TCP 三次握手和四次挥手分别解决什么？',`<p>三次握手让双方确认彼此收发能力和初始序列号：客户端 SYN → 服务端 SYN-ACK → 客户端 ACK。四次挥手因为 TCP 是全双工，双方独立关闭发送方向：FIN/ACK 后另一方处理完剩余数据再 FIN/ACK。</p><p>主动关闭方会进入 TIME_WAIT，防止旧报文影响新连接并确保最后 ACK 可重传。高并发服务应复用连接，而不是试图粗暴消灭 TIME_WAIT。</p>`],
+[3,'HTTP/1.1、HTTP/2、HTTP/3 的区别？',`<table><tr><th>版本</th><th>核心变化</th><th>注意点</th></tr><tr><td>HTTP/1.1</td><td>长连接、队头阻塞</td><td>同连接请求响应仍受顺序影响</td></tr><tr><td>HTTP/2</td><td>二进制分帧、多路复用、HPACK</td><td>TCP 丢包仍可能影响所有流</td></tr><tr><td>HTTP/3</td><td>基于 QUIC/UDP，多流独立</td><td>降低 TCP 层队头阻塞与建连延迟</td></tr></table>`],
+[3,'Cookie、Session 和 JWT 如何选择？',`<p>Session 把状态放服务端，浏览器 Cookie 带 session id；JWT 通常是服务端签名、客户端携带的自包含 token。JWT 便于无状态扩容，但撤销、权限实时更新和体积需要额外设计。</p><p>Web 场景中 Cookie 应使用 <code>HttpOnly</code>、<code>Secure</code>、合适的 <code>SameSite</code>；无论哪种，服务端必须验证身份与权限。</p>`],
+[2,'HTTPS 如何保证安全？',`<p>TLS 通过证书验证服务端身份，利用非对称加密协商密钥，后续用高效对称加密保护传输内容，并通过完整性校验防篡改。HTTPS 不能防止业务权限错误、XSS 或服务端泄漏。</p>`]
+]},
+{id:'language',title:'编程语言与并发',note:'Java / Go / Python 基础',items:[
+[3,'进程、线程和协程有什么区别？',`<p>进程有独立地址空间，隔离强；线程共享进程内存，需要同步；协程由语言运行时调度，适合大量 I/O 等待。CPU 密集计算仍需要多核并行能力，例如线程池、进程池或原生计算。</p><p>无论使用何种模型，都要有超时、取消、并发上限和背压，避免任务无限堆积。</p>`],
+[3,'Java 中 HashMap 为什么需要扩容？线程安全吗？',`<p>HashMap 用数组加桶组织键值对，负载因子过高会导致冲突增多，因此达到阈值后扩容并重新分布。它不是线程安全的，并发读写可能数据错误；需要并发场景用 <code>ConcurrentHashMap</code>，或用锁保护复合操作。</p>`],
+[3,'Python GIL 对服务开发有什么影响？',`<p>GIL 让 CPython 通常一次只执行一个线程的 Python 字节码。I/O 密集工作可用线程或 <code>asyncio</code>；CPU 密集工作使用多进程、NumPy/Numba 或 C/C++ 扩展。GIL 不等于 Python 不能并发。</p>`],
+[2,'Go 的 goroutine 和 channel 如何理解？',`<p>goroutine 是由 Go runtime 调度的轻量执行单元；channel 用于在 goroutine 间安全传递数据和同步。它们不自动解决泄漏或死锁：要设置 context 取消、channel 容量、关闭责任和超时。</p><pre><code>select {
+case result := &lt;-results:
+    return result
+case &lt;-ctx.Done():
+    return ctx.Err()
+}</code></pre>`],
+[2,'什么是数据竞争？如何避免？',`<p>多个执行单元同时访问同一可变数据，至少一个写且没有正确同步，就是数据竞争。用不可变数据、消息传递、互斥锁、原子变量或单线程所有者模型避免；先保证正确性，再考虑无锁优化。</p>`],
+[2,'异常、错误码和重试如何协作？',`<p>在进程内用异常或 Result 表达失败；跨 HTTP/API 用稳定错误码和状态码。仅对可恢复的瞬时失败重试，采用超时、指数退避和抖动；写操作要有幂等键，防止重试造成重复副作用。</p>`]
+]},
+{id:'database',title:'数据库与缓存',note:'SQL / 索引 / Redis',items:[
+[3,'索引为什么能加速查询？联合索引如何使用？',`<p>B+ 树索引利用有序结构减少数据页访问。联合索引通常遵循最左前缀，例如 <code>(tenant_id, created_at)</code> 能服务先按 tenant_id 再按 created_at 的查询。</p><p>用 <code>EXPLAIN</code> 验证执行计划；函数包裹索引列、隐式转换、前导通配符和低选择性条件都可能让索引收益下降。</p>`],
+[3,'事务 ACID 分别是什么？',`<p><b>原子性</b>：事务全成或全败；<b>一致性</b>：提交前后满足约束；<b>隔离性</b>：并发事务按规定互不干扰；<b>持久性</b>：提交后数据可恢复。隔离级别和数据库实现决定脏读、不可重复读、幻读等问题的处理。</p>`],
+[3,'什么是乐观锁和悲观锁？',`<p>悲观锁假设冲突高，先锁住数据再操作，例如 <code>SELECT ... FOR UPDATE</code>；乐观锁假设冲突低，更新时带版本条件，失败则重读或提示冲突。</p><pre><code>UPDATE inventory
+SET quantity = quantity - 1, version = version + 1
+WHERE id = :id AND quantity &gt; 0 AND version = :version;</code></pre>`],
+[3,'缓存穿透、击穿、雪崩分别是什么？',`<ul><li><b>穿透</b>：不存在的数据反复回源，使用校验、空值缓存、布隆过滤器。</li><li><b>击穿</b>：热点 key 过期后同时回源，使用互斥重建、逻辑过期或预热。</li><li><b>雪崩</b>：大量 key 同时失效或缓存整体故障，TTL 加随机值、限流降级与高可用。</li></ul>`],
+[2,'Redis 常见数据结构与使用场景？',`<table><tr><th>结构</th><th>常见场景</th></tr><tr><td>String</td><td>缓存、计数器、分布式锁 token</td></tr><tr><td>Hash</td><td>对象字段</td></tr><tr><td>List/Stream</td><td>队列、消息流</td></tr><tr><td>Set</td><td>去重、共同关注</td></tr><tr><td>ZSet</td><td>排行榜、延迟队列索引</td></tr></table><p>Redis 是内存系统，必须设内存策略、过期策略和持久化/高可用方案，不能无限当数据库使用。</p>`],
+[2,'什么是 N+1 查询，如何解决？',`<p>先查 N 条主记录，再针对每条查关联数据，形成 1+N 次查询。用 join、批量 <code>IN</code> 查询、预加载或 DataLoader 批量合并解决；同时注意 join 后的行膨胀和分页语义。</p>`]
+]},
+{id:'backend',title:'后端 API 与分布式',note:'接口、消息、可靠性',items:[
+[3,'如何设计一个 REST API？',`<p>资源使用名词 URI，方法表达操作；定义请求/响应 schema、分页、过滤、排序、状态码、错误码和版本兼容。写操作必须定义幂等、权限、审计和失败恢复。</p><pre><code>POST /orders
+GET /orders/{id}
+PATCH /orders/{id}
+DELETE /orders/{id}</code></pre>`],
+[3,'如何保证创建类接口的幂等性？',`<p>客户端提交唯一 <code>Idempotency-Key</code>；服务端在同一事务内保存 key、请求摘要和业务结果。重复 key 返回首次结果或处理中状态，不重新执行副作用。</p><p>仅靠前端禁用按钮不够，网络重试和多端请求仍会重复到达服务端。</p>`],
+[3,'消息队列为什么会重复消费？如何处理？',`<p>消费者处理完成前崩溃、ack 超时或网络失败都可能让消息重新投递。常见语义是至少一次，因此消费者要通过业务唯一键、去重表或状态机实现幂等；失败重试有上限并进入死信队列。</p>`],
+[3,'限流、熔断和降级有什么区别？',`<p><b>限流</b>控制进入系统的请求量；<b>熔断</b>在下游连续失败时临时停止调用；<b>降级</b>在资源不足或依赖失败时返回缓存、默认值或非核心功能。三者配合防止故障扩散。</p>`],
+[2,'如何做日志、指标和 Trace？',`<p>结构化日志带 trace id；指标至少有请求量、错误率、p50/p95/p99、CPU/内存/连接池等饱和度；Trace 串联跨服务调用。告警应基于用户影响和错误预算，而不是每条异常都报警。</p>`],
+[2,'如何处理数据库写入与发消息的一致性？',`<p>使用 Outbox：业务数据和待发事件在一个本地事务内写入；后台发布器可靠投递事件；消费者按 event id 幂等。避免“写库成功但消息没发”或“消息先发而事务回滚”。</p>`]
+]},
+{id:'frontend',title:'前端与 React 基础',note:'状态、渲染、工程化',items:[
+[3,'React 的 state 更新和重渲染如何理解？',`<p>state 更新会调度组件重新渲染；渲染是计算新的 UI 描述，React 再比较差异并提交必要的 DOM 更新。state 应靠近实际使用处，避免把全局状态作为默认选择。</p>`],
+[3,'列表为什么需要稳定 key？',`<p>key 是列表元素的身份，不是数组下标的装饰。插入、删除、排序后，稳定业务 ID 能让 React 将状态关联到正确元素；使用 index 在可变列表中可能导致输入框、展开状态错位。</p>`],
+[3,'useEffect 常见误区？',`<p><code>useEffect</code> 用于与 React 外部系统同步，例如请求、订阅、DOM API。依赖数组必须覆盖 effect 使用的响应式值；effect 返回清理函数取消请求、订阅或定时器。</p><pre><code>useEffect(() =&gt; {
+  const controller = new AbortController()
+  loadUser(id, controller.signal)
+  return () =&gt; controller.abort()
+}, [id])</code></pre>`],
+[2,'前端如何处理接口加载、错误与重复提交？',`<p>显式建模 loading、success、empty、error 状态；错误区分网络、认证、业务校验与未知错误。提交时禁用或合并重复动作，关键写操作仍由后端幂等保护。</p>`],
+[2,'XSS、CSRF 和 SQL 注入如何防御？',`<ul><li><b>XSS</b>：默认转义输出，避免危险 HTML，设置 CSP。</li><li><b>CSRF</b>：Cookie 场景用 SameSite、CSRF token、校验 Origin/Referer。</li><li><b>SQL 注入</b>：参数化查询/ORM 绑定参数，绝不拼接不可信输入。</li></ul>`],
+[2,'构建工具如何减少前端包体？',`<p>代码分割和动态 import、Tree Shaking、按需加载、压缩图片/字体、设置长缓存与内容 hash。先用 bundle analyzer 识别大依赖，不要靠猜测删除代码。</p>`]
+]},
+{id:'ops',title:'Linux、Docker 与 CI/CD',note:'部署排障基础',items:[
+[3,'Linux 上接口变慢，排查顺序是什么？',`<p>确认影响范围和最近变更；看应用日志、CPU/内存/磁盘/网络、连接数和 FD；再沿 Trace 查慢 SQL、缓存命中、线程池/连接池排队和下游超时。先保留证据，再回滚、限流、扩容或降级。</p><pre><code>top            # CPU / 内存
+free -h        # 内存
+ df -h         # 磁盘
+ss -lntp       # 端口与连接
+lsof -p PID    # 文件描述符</code></pre>`],
+[3,'Docker 镜像、容器、Volume、网络分别是什么？',`<p>镜像是不可变构建产物；容器是镜像运行实例；Volume 存持久数据；容器网络让服务通过名称访问。镜像使用多阶段构建、固定版本和非 root 用户；密钥通过运行时 Secret 注入。</p>`],
+[3,'CI/CD 基本流水线有哪些环节？',`<p>格式化/Lint → 单元测试 → 构建不可变制品 → 依赖/安全扫描 → 集成测试 → 部署测试环境 → 灰度生产 → 指标验证 → 完成或回滚。制品、配置、数据库迁移都需要可追溯。</p>`],
+[2,'readiness、liveness、startup probe 有什么区别？',`<p>startup probe 允许慢启动应用完成初始化；readiness 决定实例是否接收流量；liveness 失败时平台重启实例。不要把依赖短暂故障直接作为 liveness，否则可能造成重启风暴。</p>`],
+[2,'Git merge、rebase、cherry-pick 的区别？',`<p>merge 保留分支历史；rebase 重放提交并改写 hash，适合未共享本地分支；cherry-pick 选择性应用单个提交。协作上保持 PR 小且可测试，不重写他人依赖的共享历史。</p>`],
+[2,'如何安全地做数据库迁移？',`<p>采用 expand/contract：先添加向后兼容字段/表，应用同时兼容新旧读写，完成数据回填和验证后再删除旧结构。应用回滚不等于数据回滚，破坏性 DDL 必须分阶段执行。</p>`]
+]},
+{id:'algorithm',title:'算法、测试与工程习惯',note:'笔试与现场编码',items:[
+[3,'写算法题的稳定步骤是什么？',`<p>澄清输入和边界 → 给暴力解并说明复杂度 → 选择数据结构优化 → 边写边用样例走读 → 说明时间/空间复杂度 → 补充异常边界。重点展示推理过程，不是直接背模板。</p>`],
+[3,'LRU 缓存如何实现？',`<p>哈希表 O(1) 定位节点，双向链表维护最近使用顺序。访问或更新移动到头部；超过容量删除尾部并从哈希表移除。Java 可用 <code>LinkedHashMap(accessOrder=true)</code>，手写则解释两种结构的职责。</p>`],
+[2,'单元测试、集成测试、E2E 如何分层？',`<p>单元测试覆盖纯业务规则，快且定位准；集成测试验证数据库、HTTP、消息等边界；E2E 覆盖少量关键用户路径但更慢脆弱。高价值测试优先覆盖权限、金额/库存、幂等、异常恢复和核心转化。</p>`],
+[2,'代码评审应关注什么？',`<p>先看需求是否正确、边界和失败路径；再看安全、数据一致性、并发、性能、可测试性、命名和可维护性。评论应具体说明风险和建议，不把个人偏好伪装成阻塞问题。</p>`],
+[1,'如何持续积累全栈能力而不只背题？',`<p>每周完成一个闭环：一个 API + 一个界面 + 一个数据库表 + 测试 + Docker + 部署/监控。把遇到的真实失败写成复盘和回归测试。题库用于检验表达，项目才是可信证据。</p>`]
+]}
+];
+const storage='fullstack-fundamentals-mastered-v1';let mastered={};try{mastered=JSON.parse(localStorage.getItem(storage))||{}}catch(e){}const app=document.querySelector('#app'),toc=document.querySelector('#toc'),search=document.querySelector('#search'),progress=document.querySelector('#progress');let level=0,total=0;const links={};
+sections.forEach((section,si)=>{const sec=document.createElement('section');sec.className='section';sec.id=section.id;sec.innerHTML=`<h2>${si+1}. ${section.title}<span class="note">${section.note}</span></h2>`;section.items.forEach((item,qi)=>{const id=`${section.id}-${qi}`,d=document.createElement('details');d.dataset.id=id;d.dataset.level=item[0];d.dataset.text=(item[1]+' '+item[2]).toLowerCase();d.innerHTML=`<summary><span class="num">${si+1}.${qi+1}</span><span class="q">${item[1]}</span><span class="badge p${item[0]}">${'★'.repeat(item[0])}</span><button type="button" class="mark"></button></summary><div class="ans">${item[2]}</div>`;const mark=d.querySelector('.mark');const update=()=>{const on=!!mastered[id];mark.textContent=on?'已掌握':'标记掌握';mark.classList.toggle('on',on)};update();mark.onclick=e=>{e.preventDefault();e.stopPropagation();mastered[id]?delete mastered[id]:mastered[id]=true;localStorage.setItem(storage,JSON.stringify(mastered));update();render()};sec.append(d);total++});app.append(sec);const link=document.createElement('a');link.href='#'+section.id;link.innerHTML=`${si+1}. ${section.title}<span></span>`;toc.append(link);links[section.id]=link});
+function render(){const word=search.value.trim().toLowerCase();let visible=0;document.querySelectorAll('details').forEach(d=>{const ok=(!word||d.dataset.text.includes(word))&&(!level||Number(d.dataset.level)===level);d.hidden=!ok;if(ok)visible++});sections.forEach(s=>{const sec=document.querySelector('#'+s.id),count=[...sec.querySelectorAll('details')].filter(d=>!d.hidden).length;sec.hidden=!count;links[s.id].hidden=!count;links[s.id].querySelector('span').textContent=count});const done=Object.keys(mastered).filter(id=>document.querySelector(`[data-id="${id}"]`)).length;progress.textContent=`已掌握 ${done} / ${total} · 当前 ${visible} 题`}
+document.querySelectorAll('[data-level]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-level]').forEach(x=>x.classList.remove('active'));b.classList.add('active');level=Number(b.dataset.level);render()});search.oninput=render;document.querySelector('#expand').onclick=()=>document.querySelectorAll('details:not([hidden])').forEach(d=>d.open=true);document.querySelector('#collapse').onclick=()=>document.querySelectorAll('details').forEach(d=>d.open=false);document.querySelector('#random').onclick=()=>{const pool=[...document.querySelectorAll('details:not([hidden])')];if(!pool.length)return;const d=pool[Math.floor(Math.random()*pool.length)];d.open=true;d.scrollIntoView({behavior:'smooth',block:'center'})};render();
+</script>
+</body>
+</html>
